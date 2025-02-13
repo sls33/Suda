@@ -93,7 +93,7 @@ bash run_mpclr.sh
 # Efficiency of batch PIR
 
 
-# Table 5
+## Table 5
 
 Run the following script:
 
