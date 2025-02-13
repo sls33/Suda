@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+git clone https://github.com/microsoft/SEAL.git
+
+cd SEAL
+
+
+
+cmake -S . -B build -DSEAL_USE_INTEL_HEXL=ON  -DSEAL_BUILD_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=./seal_install -DSEAL_THROW_ON_TRANSPARENT_CIPHERTEXT=OFF
+cmake --build  build -j 50
+cd build
+sudo make install
+cd -
+cd -

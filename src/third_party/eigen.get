@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -d eigen ]; then
+
+    #wget -c 'https://gitlab.com/libeigen/eigen/-/archive/3.3.4/eigen-3.3.4.tar.bz2' -O ./eigen.tar.bz2
+    #tar xfj eigen.tar.bz2
+    #mv eigen-3.3.4 eigen
+    ## Note[shijunjie]: 
+    ## According to TF 2.6.0 source code on Eigen: third_party/eigen3/workspace.bzl
+    ## we should download this specific version of Eigen：
+    wget --no-check-certificate -c 'https://gitlab.com/libeigen/eigen/-/archive/12e8d57108c50d8a63605c6eb0144c838c128337/eigen-12e8d57108c50d8a63605c6eb0144c838c128337.tar.gz' -O ./eigen.tar.gz
+    tar zxf eigen.tar.gz
+    mv eigen-12e8d57108c50d8a63605c6eb0144c838c128337 eigen
+    rm  eigen.tar.gz
+fi

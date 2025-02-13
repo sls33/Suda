@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -d ntl ]; then
+    wget --no-check-certificate -c 'https://libntl.org/ntl-11.5.1.tar.gz' -O ./ntl.tar.gz
+    tar zxf ntl.tar.gz
+    mv ntl-11.5.1 ntl
+    rm  ntl.tar.gz
+fi
+
+
+cd ntl/src
+./configure SHARED=on
+make -j8
+# sudo make install
+
+

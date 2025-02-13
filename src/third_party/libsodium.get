@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -d libsodium ]; then
+    # wget -c 'https://github.com/jedisct1/libsodium/archive/refs/tags/1.0.18.tar.gz' -O ./libsodium.tar.gz
+    wget -c 'https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz' -O ./libsodium.tar.gz
+    tar zxf libsodium.tar.gz
+    mv libsodium-1.0.18 libsodium
+    rm  libsodium.tar.gz
+fi
+
+cd libsodium
+sh autogen.sh
+ARCH="$(dpkg --print-architecture)"
+case "${ARCH}" in
+    aarch64|arm64)
+    ./configure CFLAGS='-Wall -O3 -Wfatal-errors -pthread -Wno-ignored-attributes -Wno-int-in-bool-context -Wno-sign-compare -fopenmp'
+    ;;
+    amd64|x86_64)
+    ./configure CFLAGS='-Wall  -O3 -maes -msse2 -msse4.1 -msse3 -mavx -mavx2 -mpclmul -mfma -Wfatal-errors -pthread -Wno-ignored-attributes -Wno-int-in-bool-context -Wno-sign-compare -Wno-catch-value -fopenmp'
+    ;;
+    *)
+    echo "Unsupported arch: ${ARCH}"
+    exit 1
+    ;;
+esac
+
+make -j50 && make check
+cd - 

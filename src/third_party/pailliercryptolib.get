@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -d pailliercryptolib ]; then
+    # Download pailliercryptolib
+    wget -c 'https://github.com/intel/pailliercryptolib/archive/refs/tags/v2.0.0.tar.gz' -O ./pailliercryptolib.tar.gz
+    tar zxf pailliercryptolib.tar.gz
+    mv pailliercryptolib-2.0.0 pailliercryptolib
+    rm  pailliercryptolib.tar.gz
+fi
+# install nasm
+ARCH="$(dpkg --print-architecture)"
+case "${ARCH}" in
+    aarch64|arm64)
+    sudo dpkg --install ./nasm_2.14-1_arm64.deb
+    ;;
+    amd64|x86_64)
+    sudo dpkg --install ./nasm_2.14-1_amd64.deb
+    ;;
+    *)
+    echo "Unsupported arch: ${ARCH}"
+    exit 1
+    ;;
+esac
+# build && install
+cp ./pailliercryptolib_cmake ./pailliercryptolib/CMakeLists.txt
+# cd pailliercryptolib
+# sed -i '4s/.*/cmake_minimum_required(VERSION 3.13)/' CMakeLists.txt
+# cmake -S . -B build -DCMAKE_INSTALL_PREFIX=./ext_lib -DCMAKE_BUILD_TYPE=Release -DIPCL_TEST=OFF -DIPCL_BENCHMARK=OFF -DIPCL_SHARED=OFF -DIPCL_ENABLE_OMP=OFF
+# cmake --build build -j 16
+# cmake --build build --target install
+# cd ..
