@@ -46,6 +46,7 @@ Evaluate the efficiency of Suda over different data settings. The results are il
 Firstly, download and preprocess the datasets:
 
 ```
+cd python
 bash preprocess_dataset.sh
 ```
 
