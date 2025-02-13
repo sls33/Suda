@@ -34,7 +34,7 @@ bash volepsi.get
 bash setup.sh
 ```
 
-When executing this script, you may face an error about 'pip install sklearn' and you can resolve it following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
+When executing this script, you may face an error about 'pip install sklearn' and you can resolve it by following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
 
 # Efficiency of secure unbalanced data alignment
 
