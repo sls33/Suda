@@ -34,6 +34,8 @@ bash volepsi.get
 bash setup.sh
 ```
 
+When executing this script, you may face an error about 'pip install sklearn' and you can resolve it following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
+
 # Efficiency of secure unbalanced data alignment
 
 Evaluate the efficiency of Suda over different data settings. The results are illustrated in part of Table 1 (secure data alignment part), Table 2, Table 3 and Table 4 in the paper.
