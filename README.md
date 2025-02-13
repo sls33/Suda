@@ -61,7 +61,7 @@ nohup bash run_psi_to_share_using_files_test.sh > run_psi_to_share_using_files_t
 Run the following script:
 
 ```
-bash run_psi_to_share_test_size.sh > run_psi_to_share_test_size.log 2>&1 &
+bash run_psi_to_share_test_size.sh
 ```
 
 ## Table 3
@@ -69,7 +69,7 @@ bash run_psi_to_share_test_size.sh > run_psi_to_share_test_size.log 2>&1 &
 Run the following script:
 
 ```
-bash run_psi_to_share_test_payload.sh > run_psi_to_share_test_payload.log 2>&1 &
+bash run_psi_to_share_test_payload.sh 
 ```
 
 ## Table 4
@@ -77,7 +77,7 @@ bash run_psi_to_share_test_payload.sh > run_psi_to_share_test_payload.log 2>&1 &
 Run the following script:
 
 ```
-bash run_psi_to_share_test_interratio.sh > run_psi_to_share_test_interratio.log 2>&1 &
+bash run_psi_to_share_test_interratio.sh 
 ```
 
 # Efficiency of secure training
