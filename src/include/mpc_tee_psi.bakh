@@ -1,0 +1,346 @@
+#include "../third_party/libsodium/src/libsodium/include/sodium.h"
+#include "fake_netio.h"
+#include<iostream>
+#include<queue>
+// #include <pybind11/pybind11.h>
+// namespace py = pybind11;
+ 
+
+using namespace std;
+
+
+//--------P1----------------
+
+class MPCTEEPlayer1
+{
+    private:
+    unsigned char one[crypto_core_ristretto255_SCALARBYTES]={1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    unsigned char minus_one[crypto_core_ristretto255_SCALARBYTES];
+    unsigned char P[crypto_core_ristretto255_BYTES];
+    unsigned char s[crypto_core_ristretto255_SCALARBYTES];
+    unsigned char zeros_cipherR[crypto_core_ristretto255_BYTES];
+    unsigned char zeros_cipherQ[crypto_core_ristretto255_BYTES];
+    // blake3_hasher hasher;
+    // uint8_t key1[BLAKE3_KEY_LEN];
+
+
+    public:
+    MPCTEEPlayer1() {
+        crypto_core_ristretto255_scalar_negate(minus_one, one);
+        crypto_scalarmult_ristretto255_base(P, one);
+        generate_private_key();
+        generate_public_key(zeros_cipherR, zeros_cipherQ);
+        send_public_key();
+        // for (size_t i=0; i<BLAKE3_KEY_LEN; i++)
+        // {
+        //     key1[i]=0x41;
+        // }
+        // blake3_hasher_init_keyed(&hasher, key1);
+    }
+
+    ~MPCTEEPlayer1() {
+        // if (net_client_ != nullptr) {
+        //     net_client_->Leave();
+        // }
+    }
+
+    void generate_private_key()
+    {
+        crypto_core_ristretto255_scalar_random(s);
+    }
+
+    void generate_public_key(unsigned char * R, unsigned char * Q)
+    {
+        crypto_core_ristretto255_random(R);
+        crypto_scalarmult_ristretto255(Q, s, R);
+    }
+
+    void send_public_key()
+    {
+
+        send(zeros_cipherR, crypto_core_ristretto255_BYTES);
+        send(zeros_cipherQ, crypto_core_ristretto255_BYTES);
+    }
+
+    void ec_encrypt1bit(bool label,  unsigned char * R, unsigned char * Q)  
+    {
+        // unsigned char s[crypto_core_ristretto255_SCALARBYTES]
+        // unsigned char R[crypto_core_ristretto255_BYTES];
+        // unsigned char Q[crypto_core_ristretto255_BYTES];
+
+        // ([r]P, [(-1)^label]P+[rs]P) =(R, Q)
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        unsigned char r[crypto_core_ristretto255_SCALARBYTES];
+
+        unsigned char sR[crypto_core_ristretto255_BYTES];
+        // crypto_scalarmult_ristretto255_base(P, one);
+    
+    
+        crypto_core_ristretto255_scalar_random(r);
+        crypto_scalarmult_ristretto255_base(R, r);
+        crypto_scalarmult_ristretto255(sR, s, R);
+        if (label)
+        {
+            crypto_core_ristretto255_sub(Q, sR, P);
+        }
+        else
+        {
+            crypto_core_ristretto255_add(Q, sR, P);
+        }
+        
+        
+    }
+
+
+
+    bool ec_decrypt1bit(const unsigned char * R, const unsigned char * Q)
+    {
+        // unsigned char s[crypto_core_ristretto255_SCALARBYTES]
+        // unsigned char R[crypto_core_ristretto255_BYTES];
+        // unsigned char Q[crypto_core_ristretto255_BYTES];
+            // ([r]P, [label]P+[rs]P) =(R, Q)
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        
+
+        unsigned char sR[crypto_core_ristretto255_BYTES];
+        unsigned char labelP[crypto_core_ristretto255_BYTES];
+        crypto_scalarmult_ristretto255(sR, s, R);
+        crypto_core_ristretto255_sub(labelP, Q, sR);
+        int equal = sodium_memcmp(labelP, P, crypto_core_ristretto255_BYTES);
+        return equal%2;
+    }
+ 
+
+
+
+
+
+
+
+
+
+
+    void _ec_batch_encrypt1bit(size_t batch_size, bool* labels,  unsigned char * Rs, unsigned char * Qs)
+    {
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        // crypto_scalarmult_ristretto255_base(P, one);
+        for (size_t i=0; i<batch_size; i++)
+        {
+            ec_encrypt1bit(*(labels+i),  Rs+i*crypto_core_ristretto255_BYTES, Qs+i*crypto_core_ristretto255_BYTES);
+        }
+    }
+
+    vector<uint8_t> ec_batch_encrypt1bit(const std::vector<bool> & labels)
+    {
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        // crypto_scalarmult_ristretto255_base(P, one);
+        size_t batch_size=labels.size();
+        vector<uint8_t> RsQs(2*batch_size*crypto_core_ristretto255_BYTES);
+        for (size_t i=0; i<batch_size; i++)
+        {
+            ec_encrypt1bit(labels[i],  RsQs.data()+i*crypto_core_ristretto255_BYTES, RsQs.data()+(i+batch_size)*crypto_core_ristretto255_BYTES);
+        }
+        return RsQs;
+    }
+
+
+    void _ec_batch_decrypt1bit(size_t batch_size, const unsigned char * Rs, const unsigned char * Qs, bool * labels)
+    {
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        // crypto_scalarmult_ristretto255_base(P, one);
+        for (size_t i=0; i<batch_size; i++)
+        {
+            labels[i] = ec_decrypt1bit(Rs+i*crypto_core_ristretto255_BYTES, Qs+i*crypto_core_ristretto255_BYTES);
+        }
+
+    }
+
+    vector<bool> ec_batch_decrypt1bit(const std::vector<uint8_t> & RsQs)
+    {
+        // unsigned char P[crypto_core_ristretto255_BYTES];
+        // crypto_scalarmult_ristretto255_base(P, one);
+        if (RsQs.size()%(2*crypto_core_ristretto255_BYTES)!=0)
+        {
+            throw("must have RsQs.size()%(2*crypto_core_ristretto255_BYTES)==0");
+        }
+        size_t batch_size=RsQs.size()/(2*crypto_core_ristretto255_BYTES);
+        // std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+        vector<bool> labels(batch_size);
+        for (size_t i=0; i<batch_size; i++)
+        {
+            labels[i] = ec_decrypt1bit(RsQs.data() +i*crypto_core_ristretto255_BYTES, RsQs.data() +(batch_size+i)*crypto_core_ristretto255_BYTES);
+        }
+        return labels;
+    }
+
+
+
+    // void black3_hash(const string & s, size_t hash_len, uint8_t * result)
+    // {
+    //     blake3_hasher_update(&hasher,  s.c_str() , s.size());
+    //     blake3_hasher_finalize(&hasher, result, hash_len);
+    //     blake3_hasher_reset(&hasher);
+    //     return;
+    // }
+
+    // vector<uint8_t> black3_hash_batch(const vector<string> s_batch, size_t hash_len)
+    // {
+    //     size_t batch_size = s_batch.size();
+    //     std::vector<uint8_t> result(hash_len*batch_size);
+    //     for (size_t i=0; i<batch_size; i++)
+    //     {
+    //         black3_hash(s_batch[i], hash_len, result.data()+i*hash_len);
+    //     } 
+    //     return result;
+    // }
+
+
+    // void semi_homo_decrypt()
+    // {
+        
+    // }
+
+    // void semi_homo_encrypt()
+    // {
+
+    //     size_t out_len=1000;
+    //     int64_t plaintext[out_len];
+    //     for (int i=0; i<out_len; i++)
+    //     {
+    //         plaintext[i]=i*2;
+    //     }
+
+    //     int64_t ciphertext0[2];
+    //     int16_t  ciphertext1[out_len];
+    // //  #pragma omp parallel for
+
+    //     ciphertext0[0]=random();
+    //     ciphertext0[1]=random();
+    //     blake3_hasher_update(&hasher,  ciphertext0, 16);
+    //     // int64_t output[out_len];
+
+    //     blake3_hasher_finalize(&hasher, (uint8_t*) ciphertext1, out_len*2);
+    //     for (int i=0; i<out_len;i++)
+    //     {
+    //         ciphertext1[i]+=plaintext[i];
+    //     }
+
+    //     blake3_hasher_reset(&hasher);
+    //     // std::cout<<output<<std::endl;
+
+    //         // Print the hash as hexadecimal.
+    //     // for (size_t i = 0; i < out_len; i++) {
+    //     //    printf("%02x", output[i]);
+    //     // }
+    //     // std::cout<<std::endl;
+    
+
+    // }
+
+
+};
+
+
+//--------P0----------------
+
+class MPCTEEPlayer0
+{
+    private:
+    unsigned char one[crypto_core_ristretto255_SCALARBYTES]={1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    unsigned char minus_one[crypto_core_ristretto255_SCALARBYTES];
+    unsigned char P[crypto_core_ristretto255_BYTES];
+    unsigned char zeros_cipherR[crypto_core_ristretto255_BYTES];
+    unsigned char zeros_cipherQ[crypto_core_ristretto255_BYTES];
+
+    public:
+    MPCTEEPlayer0() {
+        crypto_core_ristretto255_scalar_negate(minus_one, one);
+        crypto_scalarmult_ristretto255_base(P, one);
+        receive_public_key();
+    }
+
+    ~MPCTEEPlayer0() {
+        // if (net_client_ != nullptr) {
+        //     net_client_->Leave();
+        // }
+        
+    }
+
+    void receive_public_key()
+    {
+        receive(zeros_cipherR, crypto_core_ristretto255_BYTES);
+        receive(zeros_cipherQ, crypto_core_ristretto255_BYTES);
+    }
+
+
+    void _ec_batch_cipher_split_bshares(const unsigned char * Rs, const unsigned char * Qs, size_t batch_size, bool * b0s, unsigned char * R1s, unsigned char * Q1s)
+    { // Q = (-1)^b0 Q1    R = (-1)^b0 R1  
+
+        unsigned char R1[crypto_core_ristretto255_BYTES];
+        unsigned char Q1[crypto_core_ristretto255_BYTES];
+        
+        // randombytes((unsigned char *) b0s, (batch_size+7)/8);
+        for (size_t i=0; i<batch_size; i++)
+        {
+            b0s[i] = rand()%2;
+        }
+        
+
+        for (size_t i=0; i<batch_size; i++)
+        {
+            if(b0s[i])
+            {
+                crypto_scalarmult_ristretto255(R1, minus_one, Rs+i*crypto_core_ristretto255_BYTES);
+                crypto_scalarmult_ristretto255(Q1, minus_one, Qs+i*crypto_core_ristretto255_BYTES);
+            }
+            else
+            {
+                crypto_scalarmult_ristretto255(R1, one, Rs+i*crypto_core_ristretto255_BYTES);
+                crypto_scalarmult_ristretto255(Q1, one, Qs+i*crypto_core_ristretto255_BYTES);
+            }
+
+            unsigned char r[crypto_core_ristretto255_SCALARBYTES];
+            crypto_core_ristretto255_scalar_random(r);
+            crypto_scalarmult_ristretto255(zeros_cipherR, r, zeros_cipherR);
+            crypto_scalarmult_ristretto255(zeros_cipherQ, r, zeros_cipherQ);
+
+            crypto_core_ristretto255_add(R1s+i*crypto_core_ristretto255_BYTES, zeros_cipherR, R1);
+            crypto_core_ristretto255_add(Q1s+i*crypto_core_ristretto255_BYTES, zeros_cipherQ, Q1);
+
+        }
+    }
+
+    std::vector<uint8_t> ec_batch_cipher_split_bshares(std::vector<uint8_t> RsQs) {
+        if (RsQs.size()%(2*crypto_core_ristretto255_BYTES)!=0)
+        {
+            throw("must have RsQs.size()%(2*crypto_core_ristretto255_BYTES)==0");
+        }
+        size_t batch_size=RsQs.size()/(2*crypto_core_ristretto255_BYTES);
+
+        std::vector<uint8_t> R1sQ1s(batch_size*crypto_core_ristretto255_BYTES*2);
+
+        bool b0s[batch_size];
+
+        std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+         _ec_batch_cipher_split_bshares(RsQs.data(), RsQs.data()+crypto_core_ristretto255_BYTES*batch_size, batch_size, b0s, R1sQ1s.data(),  R1sQ1s.data()+batch_size*crypto_core_ristretto255_BYTES);
+
+         std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+
+        uint8_t tmp=0;
+        for (size_t i=0; i<batch_size; i++)
+        {
+            tmp ^= b0s[i]<<(i%8);
+            if (i%8==7 || i==batch_size-1)
+            {
+                R1sQ1s.push_back(tmp);
+                tmp=0;
+            }
+        }
+         return R1sQ1s;
+        // return R1sQ1sb0s;
+    }
+    
+    // vector<bool> ec_batch_cipher_split_bshares
+};
+
+
