@@ -101,6 +101,3 @@ Run the following script:
 nohup bash run_batchpir_test.sh >batch_pir.log  2>&1 &
 ```
 
-## Part Secure Training
-
-Finnaly, you can 
