@@ -38,7 +38,7 @@ bash setup.sh
 
 Evaluate the efficiency of Suda over different data settings. The results are illustrated in part of Table 1 (secure data alignment part), Table 2, Table 3 and Table 4 in the paper.
 
-# Part of Table 1 (secure data alignment part)
+## Part of Table 1 (secure data alignment part)
 
 
 Firstly, download and preprocess the datasets:
@@ -53,7 +53,7 @@ Then run the following script:
 nohup bash run_psi_to_share_using_files_test.sh > run_psi_to_share_using_files_test.log 2>&1 &
 ```
 
-# Table 2 
+## Table 2 
 
 Run the following script:
 
@@ -61,7 +61,7 @@ Run the following script:
 bash run_psi_to_share_test_size.sh > run_psi_to_share_test_size.log 2>&1 &
 ```
 
-# Table 3
+## Table 3
 
 Run the following script:
 
@@ -69,7 +69,7 @@ Run the following script:
 bash run_psi_to_share_test_payload.sh > run_psi_to_share_test_payload.log 2>&1 &
 ```
 
-# Table 4
+## Table 4
 
 Run the following script:
 
