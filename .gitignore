@@ -5,4 +5,5 @@ src/third_party/*
 !src/third_party/*.deb
 !src/third_party/pailliercryptolib_cmake
 volepsi/out/*
-
+.venv
+.cache

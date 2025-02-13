@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
-set(CMAKE_CXX_COMPILER /usr/local/gcc/bin/g++)
-set(CMAKE_C_COMPILER /usr/local/gcc/bin/gcc)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
 project(mpc_project)
 
 

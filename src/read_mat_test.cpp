@@ -1,7 +1,8 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
-int main() {
+int main()
+{
     // 读取SVHN数据集文件
     cv::FileStorage fs("../python/data/train_32x32.mat", cv::FileStorage::READ);
 

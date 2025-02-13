@@ -90,8 +90,8 @@ void example_bgv_basics0()
     print_line(__LINE__);
     cout << "Encrypt x_plain to x_encrypted." << endl;
     encryptor.encrypt(x_plain, x_encrypted);
-    cout << "    + noise budget in freshly encrypted x: " << decryptor.invariant_noise_budget(x_encrypted) << " bits"
-         << endl;
+    cout << "    + noise budget in freshly encrypted x: "
+         << decryptor.invariant_noise_budget(x_encrypted) << " bits" << endl;
     cout << endl;
 
     /*
@@ -104,7 +104,8 @@ void example_bgv_basics0()
     cout << "    + size of x_squared: " << x_squared.size() << endl;
     evaluator.relinearize_inplace(x_squared, relin_keys);
     cout << "    + size of x_squared (after relinearization): " << x_squared.size() << endl;
-    cout << "    + noise budget in x_squared: " << decryptor.invariant_noise_budget(x_squared) << " bits" << endl;
+    cout << "    + noise budget in x_squared: " << decryptor.invariant_noise_budget(x_squared)
+         << " bits" << endl;
     Plaintext decrypted_result;
     decryptor.decrypt(x_squared, decrypted_result);
     vector<uint64_t> pod_result;
@@ -122,7 +123,8 @@ void example_bgv_basics0()
     cout << "    + size of x_4th: " << x_4th.size() << endl;
     evaluator.relinearize_inplace(x_4th, relin_keys);
     cout << "    + size of x_4th (after relinearization): " << x_4th.size() << endl;
-    cout << "    + noise budget in x_4th: " << decryptor.invariant_noise_budget(x_4th) << " bits" << endl;
+    cout << "    + noise budget in x_4th: " << decryptor.invariant_noise_budget(x_4th) << " bits"
+         << endl;
     decryptor.decrypt(x_4th, decrypted_result);
     batch_encoder.decode(decrypted_result, pod_result);
     cout << "    + result plaintext matrix ...... Correct." << endl;
@@ -138,7 +140,8 @@ void example_bgv_basics0()
     cout << "    + size of x_8th: " << x_8th.size() << endl;
     evaluator.relinearize_inplace(x_8th, relin_keys);
     cout << "    + size of x_8th (after relinearization): " << x_8th.size() << endl;
-    cout << "    + noise budget in x_8th: " << decryptor.invariant_noise_budget(x_8th) << " bits" << endl;
+    cout << "    + noise budget in x_8th: " << decryptor.invariant_noise_budget(x_8th) << " bits"
+         << endl;
     cout << "NOTE: Decryption can be incorrect if noise budget is zero." << endl;
 
     cout << endl;
@@ -153,8 +156,8 @@ void example_bgv_basics0()
     print_line(__LINE__);
     cout << "Encrypt x_plain to x_encrypted." << endl;
     encryptor.encrypt(x_plain, x_encrypted);
-    cout << "    + noise budget in freshly encrypted x: " << decryptor.invariant_noise_budget(x_encrypted) << " bits"
-         << endl;
+    cout << "    + noise budget in freshly encrypted x: "
+         << decryptor.invariant_noise_budget(x_encrypted) << " bits" << endl;
     cout << endl;
 
     /*
@@ -162,13 +165,13 @@ void example_bgv_basics0()
     */
     print_line(__LINE__);
     cout << "Compute and relinearize x_squared (x^2)," << endl;
-    cout << "    + noise budget in x_squared (previously): " << decryptor.invariant_noise_budget(x_squared) << " bits"
-         << endl;
+    cout << "    + noise budget in x_squared (previously): "
+         << decryptor.invariant_noise_budget(x_squared) << " bits" << endl;
     evaluator.square(x_encrypted, x_squared);
     evaluator.relinearize_inplace(x_squared, relin_keys);
     evaluator.mod_switch_to_next_inplace(x_squared);
-    cout << "    + noise budget in x_squared (with modulus switching): " << decryptor.invariant_noise_budget(x_squared)
-         << " bits" << endl;
+    cout << "    + noise budget in x_squared (with modulus switching): "
+         << decryptor.invariant_noise_budget(x_squared) << " bits" << endl;
     decryptor.decrypt(x_squared, decrypted_result);
     batch_encoder.decode(decrypted_result, pod_result);
     cout << "    + result plaintext matrix ...... Correct." << endl;
@@ -179,12 +182,13 @@ void example_bgv_basics0()
     */
     print_line(__LINE__);
     cout << "Compute and relinearize x_4th (x^4)," << endl;
-    cout << "    + noise budget in x_4th (previously): " << decryptor.invariant_noise_budget(x_4th) << " bits" << endl;
+    cout << "    + noise budget in x_4th (previously): " << decryptor.invariant_noise_budget(x_4th)
+         << " bits" << endl;
     evaluator.square(x_squared, x_4th);
     evaluator.relinearize_inplace(x_4th, relin_keys);
     evaluator.mod_switch_to_next_inplace(x_4th);
-    cout << "    + noise budget in x_4th (with modulus switching): " << decryptor.invariant_noise_budget(x_4th)
-         << " bits" << endl;
+    cout << "    + noise budget in x_4th (with modulus switching): "
+         << decryptor.invariant_noise_budget(x_4th) << " bits" << endl;
     decryptor.decrypt(x_4th, decrypted_result);
     batch_encoder.decode(decrypted_result, pod_result);
     cout << "    + result plaintext matrix ...... Correct." << endl;
@@ -195,12 +199,13 @@ void example_bgv_basics0()
     */
     print_line(__LINE__);
     cout << "Compute and relinearize x_8th (x^8)," << endl;
-    cout << "    + noise budget in x_8th (previously): " << decryptor.invariant_noise_budget(x_8th) << " bits" << endl;
+    cout << "    + noise budget in x_8th (previously): " << decryptor.invariant_noise_budget(x_8th)
+         << " bits" << endl;
     evaluator.square(x_4th, x_8th);
     evaluator.relinearize_inplace(x_8th, relin_keys);
     evaluator.mod_switch_to_next_inplace(x_8th);
-    cout << "    + noise budget in x_8th (with modulus switching): " << decryptor.invariant_noise_budget(x_8th)
-         << " bits" << endl;
+    cout << "    + noise budget in x_8th (with modulus switching): "
+         << decryptor.invariant_noise_budget(x_8th) << " bits" << endl;
     decryptor.decrypt(x_8th, decrypted_result);
     batch_encoder.decode(decrypted_result, pod_result);
     cout << "    + result plaintext matrix ...... Correct." << endl;
@@ -213,8 +218,6 @@ void example_bgv_basics0()
     location to insert modulus switching and manually choose coeff_modulus.
     */
 }
-
-
 
 void example_bgv_basics_60()
 {
@@ -309,12 +312,13 @@ void example_bgv_basics_60()
     for the given poly_modulus_degree.
     */
     parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
-    //parms.set_coeff_modulus({1073754113});
-    //parms.set_coeff_modulus({1073692673}); //最接近30 bit的符合条件的素数
-    //parms.set_coeff_modulus({4151297});  //coeff_modulus size: 22  bits OK but noise budget in kx =0
-    //parms.set_coeff_modulus({4188161});    // coeff_modulus size: 22 bits OK but noise budget in kx =0
-    //parms.set_coeff_modulus({4263937}); // coeff_modulus size: 23  bits OK  noise budget in kx = 1
-    //parms.set_coeff_modulus({4323329}); // coeff_modulus size: 23  bits OK  noise budget in kx = 1
+    // parms.set_coeff_modulus({1073754113});
+    // parms.set_coeff_modulus({1073692673}); //最接近30 bit的符合条件的素数
+    // parms.set_coeff_modulus({4151297});  //coeff_modulus size: 22  bits OK but noise budget in kx
+    // =0 parms.set_coeff_modulus({4188161});    // coeff_modulus size: 22 bits OK but noise budget
+    // in kx =0 parms.set_coeff_modulus({4263937}); // coeff_modulus size: 23  bits OK  noise budget
+    // in kx = 1 parms.set_coeff_modulus({4323329}); // coeff_modulus size: 23  bits OK  noise
+    // budget in kx = 1
 
     /*
     The plaintext modulus can be any positive integer, even though here we take
@@ -333,13 +337,12 @@ void example_bgv_basics_60()
     The plaintext modulus is specific to the BFV scheme, and cannot be set when
     using the CKKS scheme.
     */
-    //parms.set_plain_modulus(1024);
-    //parms.set_plain_modulus(257);
-    //parms.set_plain_modulus(67);
-    //parms.set_plain_modulus(1UL<<59);   //
-    uint64_t plain_module = 1UL<<48;
+    // parms.set_plain_modulus(1024);
+    // parms.set_plain_modulus(257);
+    // parms.set_plain_modulus(67);
+    // parms.set_plain_modulus(1UL<<59);   //
+    uint64_t plain_module = 1UL << 48;
     parms.set_plain_modulus(plain_module);
-    
 
     /*
     Now that all parameters are set, we are ready to construct a SEALContext
@@ -432,12 +435,13 @@ void example_bgv_basics_60()
     a string with coefficients represented as hexadecimal numbers.
     */
     print_line(__LINE__);
-    //uint64_t x = 66;
-    //Plaintext x_plain(uint64_to_hex_string(x));
+    // uint64_t x = 66;
+    // Plaintext x_plain(uint64_to_hex_string(x));
     string x = "40x^1023 + 30x^3 + 1x^1 + 3";
-    //Plaintext x_plain("40x^1023 + 30x^3 + 1x^1 + 3");
+    // Plaintext x_plain("40x^1023 + 30x^3 + 1x^1 + 3");
     Plaintext x_plain(x);
-    cout << "Express x = " + x + " as a plaintext polynomial 0x" + x_plain.to_string() + "." << endl;
+    cout << "Express x = " + x + " as a plaintext polynomial 0x" + x_plain.to_string() + "."
+         << endl;
 
     /*
     We then encrypt the plaintext, producing a ciphertext. We note that the
@@ -462,8 +466,8 @@ void example_bgv_basics_60()
     /*
     There is plenty of noise budget left in this freshly encrypted ciphertext.
     */
-    cout << "    + noise budget in freshly encrypted x: " << decryptor.invariant_noise_budget(x_encrypted) << " bits"
-         << endl;
+    cout << "    + noise budget in freshly encrypted x: "
+         << decryptor.invariant_noise_budget(x_encrypted) << " bits" << endl;
 
     /*
     We decrypt the ciphertext and print the resulting plaintext in order to
@@ -495,31 +499,31 @@ void example_bgv_basics_60()
 
     print_line(__LINE__);
     cout << "Compute x * x_plain." << endl;
-    //Ciphertext kx;
-    //evaluator.square(x_encrypted, x_sq_plus_one);
-    //Plaintext k("40"); //64
-    //Plaintext k("1x^120"); // 66
-    //Plaintext k("1x^120 + 1x^60 + 1x^30");
+    // Ciphertext kx;
+    // evaluator.square(x_encrypted, x_sq_plus_one);
+    // Plaintext k("40"); //64
+    // Plaintext k("1x^120"); // 66
+    // Plaintext k("1x^120 + 1x^60 + 1x^30");
     Plaintext k(poly_modulus_degree);
-    k[120]=1;
-    k[60]=0;
-    k[30]=1;
+    k[120] = 1;
+    k[60] = 0;
+    k[30] = 1;
 
-    //Plaintext b("30"); // 
+    // Plaintext b("30"); //
     time_t start_time, end_time;
     time(&start_time);
     evaluator.multiply_plain(x_encrypted, k, x_encrypted_sum);
-    //x_encrypted_sum = x_encrypted;
-    //#pragma omp parallel for
-    // for (int i=0; i<10000000/4096; i++)
-    // //for (int i=0; i<100000; i++)
-    // {
-    //     evaluator.multiply_plain(x_encrypted, k, x_encrypted1);
-    //     evaluator.add(x_encrypted1, x_encrypted_sum, x_encrypted_sum);
-    // }
-    // time(&end_time);
-    // time_t dtime = difftime(end_time,start_time);
-    // std::cout<<"time="<<dtime<<std::endl;
+    // x_encrypted_sum = x_encrypted;
+    // #pragma omp parallel for
+    //  for (int i=0; i<10000000/4096; i++)
+    //  //for (int i=0; i<100000; i++)
+    //  {
+    //      evaluator.multiply_plain(x_encrypted, k, x_encrypted1);
+    //      evaluator.add(x_encrypted1, x_encrypted_sum, x_encrypted_sum);
+    //  }
+    //  time(&end_time);
+    //  time_t dtime = difftime(end_time,start_time);
+    //  std::cout<<"time="<<dtime<<std::endl;
 
     //     time(&start_time);
     // for (int i=0; i<1000000; i++)
@@ -530,19 +534,14 @@ void example_bgv_basics_60()
     // dtime = difftime(end_time,start_time);
     // std::cout<<"time="<<dtime<<std::endl;
 
-    //evaluator.add_plain_inplace(x_encrypted, b);
+    // evaluator.add_plain_inplace(x_encrypted, b);
     cout << "    + size of x * x_plain: " << x_encrypted.size() << endl;
-    cout << "    + noise budget in x * x_plain: " << decryptor.invariant_noise_budget(x_encrypted) << " bits"
-         << endl;
+    cout << "    + noise budget in x * x_plain: " << decryptor.invariant_noise_budget(x_encrypted)
+         << " bits" << endl;
     Plaintext decrypted_result;
     cout << "    + decryption of x * x_plain: ";
     decryptor.decrypt(x_encrypted_sum, decrypted_result);
     cout << "0x" << decrypted_result.to_string() << " ...... Correct." << endl;
-
-
-
-
-
 
     // print_line(__LINE__);
     // cout << "Compute x_sq_plus_one (x^2+1)." << endl;
@@ -559,7 +558,8 @@ void example_bgv_basics_60()
     consumption.
     */
     // cout << "    + size of x_sq_plus_one: " << x_sq_plus_one.size() << endl;
-    // cout << "    + noise budget in x_sq_plus_one: " << decryptor.invariant_noise_budget(x_sq_plus_one) << " bits"
+    // cout << "    + noise budget in x_sq_plus_one: " <<
+    // decryptor.invariant_noise_budget(x_sq_plus_one) << " bits"
     //      << endl;
 
     /*
@@ -580,7 +580,8 @@ void example_bgv_basics_60()
     // evaluator.add_plain(x_encrypted, plain_one, x_plus_one_sq);
     // evaluator.square_inplace(x_plus_one_sq);
     // cout << "    + size of x_plus_one_sq: " << x_plus_one_sq.size() << endl;
-    // cout << "    + noise budget in x_plus_one_sq: " << decryptor.invariant_noise_budget(x_plus_one_sq) << " bits"
+    // cout << "    + noise budget in x_plus_one_sq: " <<
+    // decryptor.invariant_noise_budget(x_plus_one_sq) << " bits"
     //      << endl;
     // cout << "    + decryption of x_plus_one_sq: ";
     // decryptor.decrypt(x_plus_one_sq, decrypted_result);
@@ -596,7 +597,8 @@ void example_bgv_basics_60()
     // evaluator.multiply_plain_inplace(x_sq_plus_one, plain_four);
     // evaluator.multiply(x_sq_plus_one, x_plus_one_sq, encrypted_result);
     // cout << "    + size of encrypted_result: " << encrypted_result.size() << endl;
-    // cout << "    + noise budget in encrypted_result: " << decryptor.invariant_noise_budget(encrypted_result) << " bits"
+    // cout << "    + noise budget in encrypted_result: " <<
+    // decryptor.invariant_noise_budget(encrypted_result) << " bits"
     //      << endl;
     // cout << "NOTE: Decryption can be incorrect if noise budget is zero." << endl;
 
@@ -644,7 +646,8 @@ void example_bgv_basics_60()
     // evaluator.relinearize_inplace(x_squared, relin_keys);
     // cout << "    + size of x_squared (after relinearization): " << x_squared.size() << endl;
     // evaluator.add_plain(x_squared, plain_one, x_sq_plus_one);
-    // cout << "    + noise budget in x_sq_plus_one: " << decryptor.invariant_noise_budget(x_sq_plus_one) << " bits"
+    // cout << "    + noise budget in x_sq_plus_one: " <<
+    // decryptor.invariant_noise_budget(x_sq_plus_one) << " bits"
     //      << endl;
     // cout << "    + decryption of x_sq_plus_one: ";
     // decryptor.decrypt(x_sq_plus_one, decrypted_result);
@@ -658,7 +661,8 @@ void example_bgv_basics_60()
     // evaluator.square(x_plus_one, x_plus_one_sq);
     // cout << "    + size of x_plus_one_sq: " << x_plus_one_sq.size() << endl;
     // evaluator.relinearize_inplace(x_plus_one_sq, relin_keys);
-    // cout << "    + noise budget in x_plus_one_sq: " << decryptor.invariant_noise_budget(x_plus_one_sq) << " bits"
+    // cout << "    + noise budget in x_plus_one_sq: " <<
+    // decryptor.invariant_noise_budget(x_plus_one_sq) << " bits"
     //      << endl;
     // cout << "    + decryption of x_plus_one_sq: ";
     // decryptor.decrypt(x_plus_one_sq, decrypted_result);
@@ -670,8 +674,9 @@ void example_bgv_basics_60()
     // evaluator.multiply(x_sq_plus_one, x_plus_one_sq, encrypted_result);
     // cout << "    + size of encrypted_result: " << encrypted_result.size() << endl;
     // evaluator.relinearize_inplace(encrypted_result, relin_keys);
-    // cout << "    + size of encrypted_result (after relinearization): " << encrypted_result.size() << endl;
-    // cout << "    + noise budget in encrypted_result: " << decryptor.invariant_noise_budget(encrypted_result) << " bits"
+    // cout << "    + size of encrypted_result (after relinearization): " << encrypted_result.size()
+    // << endl; cout << "    + noise budget in encrypted_result: " <<
+    // decryptor.invariant_noise_budget(encrypted_result) << " bits"
     //      << endl;
 
     // cout << endl;
@@ -684,8 +689,8 @@ void example_bgv_basics_60()
     // print_line(__LINE__);
     // cout << "Decrypt encrypted_result (4(x^2+1)(x+1)^2)." << endl;
     // decryptor.decrypt(encrypted_result, decrypted_result);
-    // cout << "    + decryption of 4(x^2+1)(x+1)^2 = 0x" << decrypted_result.to_string() << " ...... Correct." << endl;
-    // cout << endl;
+    // cout << "    + decryption of 4(x^2+1)(x+1)^2 = 0x" << decrypted_result.to_string() << "
+    // ...... Correct." << endl; cout << endl;
 
     // /*
     // For x=6, 4(x^2+1)(x+1)^2 = 7252. Since the plaintext modulus is set to 1024,
@@ -704,65 +709,62 @@ void example_bgv_basics_60()
     // parms.set_poly_modulus_degree(2048);
     // context = SEALContext(parms);
     // print_parameters(context);
-    // cout << "Parameter validation (failed): " << context.parameter_error_message() << endl << endl;
+    // cout << "Parameter validation (failed): " << context.parameter_error_message() << endl <<
+    // endl;
 
     // /*
     // This information is helpful to fix invalid encryption parameters.
     // */
 }
 
-
-
-void see_cipher(const BatchEncoder  &encoder, Decryptor& decryptor, const vector<Ciphertext> & c)
+void see_cipher(const BatchEncoder &encoder, Decryptor &decryptor, const vector<Ciphertext> &c)
 {
-    for (int i=0; i<c.size(); i++)
-    {   
+    for (int i = 0; i < c.size(); i++) {
         Plaintext p_result;
         vector<uint64_t> r;
         decryptor.decrypt(c[i], p_result);
         encoder.decode(p_result, r);
-        cout << "    + result ...... i="<<i<< endl;
+        cout << "    + result ...... i=" << i << endl;
         print_vector(r, 2048, 7);
     }
 }
 
-vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator & evaluator, const BatchEncoder &encoder, const GaloisKeys &galois_keys, int cols, int deep=-2)
+vector<Ciphertext> decomposition(
+    const vector<Ciphertext> &c,
+    const Evaluator &evaluator,
+    const BatchEncoder &encoder,
+    const GaloisKeys &galois_keys,
+    int cols,
+    int deep = -2)
 {
-
     vector<Ciphertext> result;
-    if ((deep<-1) || (deep>=log2(cols)))
-    {
-        deep=log2(cols)-1;
+    if ((deep < -1) || (deep >= log2(cols))) {
+        deep = log2(cols) - 1;
     }
 
-    std::cout<<"deep="<<deep<<std::endl;
-    
-    //if (deep==-1)
-    if (deep==7)
-    {
+    std::cout << "deep=" << deep << std::endl;
+
+    // if (deep==-1)
+    if (deep == 7) {
         return c;
     }
-    
 
     vector<uint64_t> mask_l, mask_r;
-    mask_l.resize(cols*2);
-    mask_r.resize(cols*2);
+    mask_l.resize(cols * 2);
+    mask_r.resize(cols * 2);
     print_line(__LINE__);
-    for (int i=0; i<cols; i++)
-    {
-        if ( ((~i)&(1U<<deep))==(1U<<deep))  // left 
+    for (int i = 0; i < cols; i++) {
+        if (((~i) & (1U << deep)) == (1U << deep)) // left
         {
-            mask_l[i]=1;
-            mask_l[cols+i]=1;
-            mask_r[i]=0;
-            mask_r[cols+i]=0;
-        }
-        else   
-        {
-            mask_l[i]=0;
-            mask_l[cols+i]=0;
-            mask_r[i]=1;
-            mask_r[cols+i]=1;
+            mask_l[i] = 1;
+            mask_l[cols + i] = 1;
+            mask_r[i] = 0;
+            mask_r[cols + i] = 0;
+        } else {
+            mask_l[i] = 0;
+            mask_l[cols + i] = 0;
+            mask_r[i] = 1;
+            mask_r[cols + i] = 1;
         }
     }
     // std::cout<<"mask_l="<<std::endl;
@@ -781,47 +783,41 @@ vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator &
     Plaintext p_mask_l, p_mask_r;
     encoder.encode(mask_l, p_mask_l);
     encoder.encode(mask_r, p_mask_r);
-     print_line(__LINE__);
-    for (int i=0; i<c.size(); i++)
-    {
-        //print_line(__LINE__);
-        //std::cout<<"i="<<i<<std::endl;
+    print_line(__LINE__);
+    for (int i = 0; i < c.size(); i++) {
+        // print_line(__LINE__);
+        // std::cout<<"i="<<i<<std::endl;
         Ciphertext cl, cr, cl_rotate, cr_rotate;
-        //print_line(__LINE__);
+        // print_line(__LINE__);
 
         evaluator.multiply_plain(c[i], p_mask_l, cl);
-        //print_line(__LINE__);
-        evaluator.rotate_rows(cl, 1<<deep, galois_keys, cl_rotate);
-        //print_line(__LINE__);
+        // print_line(__LINE__);
+        evaluator.rotate_rows(cl, 1 << deep, galois_keys, cl_rotate);
+        // print_line(__LINE__);
         evaluator.add_inplace(cl, cl_rotate);
-        //evaluator.mod_switch_to_next_inplace(cl);
-        //print_line(__LINE__);
+        // evaluator.mod_switch_to_next_inplace(cl);
+        // print_line(__LINE__);
         result.push_back(cl);
-        //print_line(__LINE__);
+        // print_line(__LINE__);
         evaluator.multiply_plain(c[i], p_mask_r, cr);
-        //print_line(__LINE__);
-        evaluator.rotate_rows(cr, 1<<deep, galois_keys, cr_rotate);
-       // print_line(__LINE__);
-        //evaluator.add_inplace(cr, cr_rotate);
-        //print_line(__LINE__);
+        // print_line(__LINE__);
+        evaluator.rotate_rows(cr, 1 << deep, galois_keys, cr_rotate);
+        // print_line(__LINE__);
+        // evaluator.add_inplace(cr, cr_rotate);
+        // print_line(__LINE__);
         result.push_back(cr);
         evaluator.mod_switch_to_next_inplace(cr);
-        //print_line(__LINE__);
+        // print_line(__LINE__);
     }
-     //print_line(__LINE__);
+    // print_line(__LINE__);
 
-    result=decomposition(result, evaluator, encoder, galois_keys, cols, deep-1);
-
-    
-
+    result = decomposition(result, evaluator, encoder, galois_keys, cols, deep - 1);
 
     return result;
 }
 
-
-
-
-// vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator & evaluator, const GaloisKeys &galois_keys, int cols, int deep=-2)
+// vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator & evaluator, const
+// GaloisKeys &galois_keys, int cols, int deep=-2)
 // {
 
 //     vector<Ciphertext> result;
@@ -831,13 +827,12 @@ vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator &
 //     }
 
 //     std::cout<<"deep="<<deep<<std::endl;
-    
+
 //     //if (deep==-1)
 //     if (deep==7)
 //     {
 //         return c;
 //     }
-    
 
 //     vector<uint64_t> mask_l, mask_r;
 //     mask_l.resize(cols*2);
@@ -845,14 +840,14 @@ vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator &
 //     print_line(__LINE__);
 //     for (int i=0; i<cols; i++)
 //     {
-//         if ( ((~i)&(1U<<deep))==(1U<<deep))  // left 
+//         if ( ((~i)&(1U<<deep))==(1U<<deep))  // left
 //         {
 //             mask_l[i]=1;
 //             mask_l[cols+i]=1;
 //             mask_r[i]=0;
 //             mask_r[cols+i]=0;
 //         }
-//         else   
+//         else
 //         {
 //             mask_l[i]=0;
 //             mask_l[cols+i]=0;
@@ -907,22 +902,18 @@ vector<Ciphertext> decomposition(const vector<Ciphertext> & c, const Evaluator &
 
 //     result=decomposition(result, evaluator, encoder, galois_keys, cols, deep-1);
 
-    
-
-
 //     return result;
 // }
-
 
 void test_decomponent_bgv()
 {
     EncryptionParameters parms(scheme_type::bgv);
 
-    size_t poly_modulus_degree = 2048*2;
-    size_t cols = poly_modulus_degree/2;
+    size_t poly_modulus_degree = 2048 * 2;
+    size_t cols = poly_modulus_degree / 2;
     parms.set_plain_modulus(PlainModulus::Batching(poly_modulus_degree, 16));
     parms.set_poly_modulus_degree(poly_modulus_degree);
-    //parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 40, 40, 60 }));
+    // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 40, 40, 60 }));
     parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
 
     /*
@@ -951,27 +942,24 @@ void test_decomponent_bgv()
     Decryptor decryptor(context, secret_key);
 
     BatchEncoder encoder(context);
-    vector<uint64_t> x(cols*2);
-    for (int i=0; i<cols*2; i++)
-    {
-        x[i]=i%3;
+    vector<uint64_t> x(cols * 2);
+    for (int i = 0; i < cols * 2; i++) {
+        x[i] = i % 3;
     }
     Plaintext p_x;
     Ciphertext c_x;
     encoder.encode(x, p_x);
     encryptor.encrypt(p_x, c_x);
 
-    see_cipher(encoder, decryptor, {c_x});
-    auto decomped_querys=decomposition({c_x}, evaluator, encoder, galois_keys, cols, -2);
+    see_cipher(encoder, decryptor, { c_x });
+    auto decomped_querys = decomposition({ c_x }, evaluator, encoder, galois_keys, cols, -2);
 
-    auto  budget=decryptor.invariant_noise_budget(decomped_querys[0]);
-    std::cout<<"budget="<<budget<<std::endl;
+    auto budget = decryptor.invariant_noise_budget(decomped_querys[0]);
+    std::cout << "budget=" << budget << std::endl;
     print_line(__LINE__);
-    
-    see_cipher(encoder, decryptor, {decomped_querys[0]});
 
+    see_cipher(encoder, decryptor, { decomped_querys[0] });
 }
-
 
 void example_batch_encoder8192_167772161_bgv_dedegree()
 {
@@ -994,14 +982,13 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     simply changing `scheme_type::bfv` into `scheme_type::bgv` can make this example
     work for the BGV scheme.
     */
-    //int n =  16;
+    // int n =  16;
     EncryptionParameters parms(scheme_type::bgv);
     size_t poly_modulus_degree = 8192;
-    //size_t poly_modulus_degree = 1<<n;
+    // size_t poly_modulus_degree = 1<<n;
     parms.set_poly_modulus_degree(poly_modulus_degree);
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(4096));
-    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 41, 42, 42}));
-
+    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 41, 42, 42 }));
 
     /*
     To enable batching, we need to set the plain_modulus to be a prime number
@@ -1032,12 +1019,9 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     Evaluator evaluator(context);
     Decryptor decryptor(context, secret_key);
 
-    std::cout<<__FILE__<<":"<<__LINE__<<std::endl;
+    std::cout << __FILE__ << ":" << __LINE__ << std::endl;
     // RelinKeys relin_keys;
     // keygen.create_relin_keys(relin_keys);
-
-   
-
 
     // Plaintext plain_matrix("83886080x^1023 + 30x^3 + 83886080x^1 + 3");
     // string x = "a000000x^1023 + 30x^3 + 1x^1 + a000000";
@@ -1047,11 +1031,9 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     // plain_matrix[1]=1UL;
     // plain_matrix[3]=30UL;
     // plain_matrix[1023]=167772160UL;
-    for (int i=0; i<4096; i++)
-    {
-        plain_matrix[i]=random_uint64()%167772161UL;
+    for (int i = 0; i < 4096; i++) {
+        plain_matrix[i] = random_uint64() % 167772161UL;
     }
-
 
     // cout << "Express x  as a plaintext polynomial 0x" + plain_matrix.to_string() + "." << endl;
 
@@ -1065,12 +1047,13 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     cout << "Encrypt plain_matrix to encrypted_matrix." << endl;
     encryptor.encrypt(plain_matrix, encrypted_matrix);
     print_line(__LINE__);
-    std::cout<<"is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
-    cout << "    + Noise budget in encrypted_matrix: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
-         << endl;
+    std::cout << "is_ntt_form<<" << encrypted_matrix.is_ntt_form() << std::endl;
+    cout << "    + Noise budget in encrypted_matrix: "
+         << decryptor.invariant_noise_budget(encrypted_matrix) << " bits" << endl;
     // evaluator.transform_to_ntt_inplace(encrypted_matrix);
     // std::cout<<"is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
-    // cout << "    + Noise budget in encrypted_matrix: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
+    // cout << "    + Noise budget in encrypted_matrix: " <<
+    // decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
     //      << endl;
 
     /*
@@ -1084,7 +1067,6 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     and encode it into a plaintext.
     */
 
-
     /*
     We now add the second (plaintext) matrix to the encrypted matrix, and square
     the sum.
@@ -1092,30 +1074,27 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     print_line(__LINE__);
     cout << "multiply plaintext and sum" << endl;
     evaluator.transform_to_ntt_inplace(plain_matrix, context.first_parms_id());
-     std::cout<<"plain_matrix is_ntt_form<<"<<plain_matrix.is_ntt_form()<<std::endl;
-        time_t start_time, end_time;
+    std::cout << "plain_matrix is_ntt_form<<" << plain_matrix.is_ntt_form() << std::endl;
+    time_t start_time, end_time;
     time(&start_time);
-//    #pragma omp parallel for
-    for (int i=0; i<4096*4; i++)
-    {
+    //    #pragma omp parallel for
+    for (int i = 0; i < 4096 * 4; i++) {
         evaluator.multiply_plain(encrypted_matrix, plain_matrix, encrypted_matrix2);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix2);
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix2);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix2);
         }
     }
 
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
+    std::cout << "time=" << end_time - start_time << std::endl;
     /*
     How much noise budget do we have left?
     */
-    cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
+    cout << "    + Noise budget in result: "
+         << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
 
     /*
     We decrypt and decompose the plaintext to recover the result as a matrix.
@@ -1139,8 +1118,6 @@ void example_batch_encoder8192_167772161_bgv_dedegree()
     */
 }
 
-
-
 void example_batch_encoder8192_167772161_bgv_evaluation()
 {
     print_example_banner("Example: Encoders / Batch Encoder");
@@ -1162,16 +1139,15 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     simply changing `scheme_type::bfv` into `scheme_type::bgv` can make this example
     work for the BGV scheme.
     */
-    //int n =  16;
+    // int n =  16;
     EncryptionParameters parms(scheme_type::bgv);
     size_t poly_modulus_degree = 8192;
-    //size_t poly_modulus_degree = 1<<n;
+    // size_t poly_modulus_degree = 1<<n;
     parms.set_poly_modulus_degree(poly_modulus_degree);
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
     // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 41, 41, 42, 42}));
-    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 42, 42, 42, 42}));
-
+    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 42, 42, 42, 42 }));
 
     /*
     To enable batching, we need to set the plain_modulus to be a prime number
@@ -1202,7 +1178,6 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     Encryptor encryptor(context, public_key);
     Evaluator evaluator(context);
     Decryptor decryptor(context, secret_key);
-
 
     RelinKeys relin_keys;
     keygen.create_relin_keys(relin_keys);
@@ -1265,8 +1240,8 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     print_line(__LINE__);
     cout << "Encrypt plain_matrix to encrypted_matrix." << endl;
     encryptor.encrypt(plain_matrix, encrypted_matrix);
-    cout << "    + Noise budget in encrypted_matrix: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
-         << endl;
+    cout << "    + Noise budget in encrypted_matrix: "
+         << decryptor.invariant_noise_budget(encrypted_matrix) << " bits" << endl;
 
     /*
     Operating on the ciphertext results in homomorphic operations being performed
@@ -1279,7 +1254,7 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     and encode it into a plaintext.
     */
     Plaintext k(1);
-    k[0]=167772160UL;
+    k[0] = 167772160UL;
 
     /*
     We now add the second (plaintext) matrix to the encrypted matrix, and square
@@ -1287,68 +1262,58 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     */
     print_line(__LINE__);
     cout << "scala multiply " << endl;
-        time_t start_time, end_time;
+    time_t start_time, end_time;
     time(&start_time);
-    std::cout<<"k is ntt form"<<k.is_ntt_form()<<std::endl;
-    std::cout<<"encrypted_matrix is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
+    std::cout << "k is ntt form" << k.is_ntt_form() << std::endl;
+    std::cout << "encrypted_matrix is_ntt_form<<" << encrypted_matrix.is_ntt_form() << std::endl;
     evaluator.transform_from_ntt_inplace(encrypted_matrix);
-    std::cout<<"encrypted_matrix is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
+    std::cout << "encrypted_matrix is_ntt_form<<" << encrypted_matrix.is_ntt_form() << std::endl;
 
-    for (int i=0; i<8192; i++)
-    {
+    for (int i = 0; i < 8192; i++) {
         evaluator.multiply_plain(encrypted_matrix, k, encrypted_matrix2);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix2);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix2);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix2);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     evaluator.transform_to_ntt_inplace(encrypted_matrix);
-    //  cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
-// evaluator.transform_from_ntt_inplace(sum_encrypted_matrix);
+    //  cout << "    + Noise budget in result: " <<
+    //  decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
+    // evaluator.transform_from_ntt_inplace(sum_encrypted_matrix);
 
     Ciphertext encrypted_matrix2_ntt;
 
     print_line(__LINE__);
     cout << " multiply " << endl;
-        // time_t start_time, end_time;
+    // time_t start_time, end_time;
 
     encrypted_matrix2 = Ciphertext(sum_encrypted_matrix);
-    
+
     time(&start_time);
 
-
-    for (int i=0; i<64; i++)
-    {
-
+    for (int i = 0; i < 64; i++) {
         evaluator.transform_to_ntt(encrypted_matrix2, encrypted_matrix2_ntt);
         evaluator.multiply(encrypted_matrix, encrypted_matrix2_ntt, encrypted_matrix3);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
-
-
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     /*
     How much noise budget do we have left?
     */
-    cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
+    cout << "    + Noise budget in result: "
+         << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
 
     /*
     We decrypt and decompose the plaintext to recover the result as a matrix.
@@ -1373,8 +1338,6 @@ void example_batch_encoder8192_167772161_bgv_evaluation()
     */
 }
 
-
-
 void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
 {
     print_example_banner("Example: Encoders / Batch Encoder");
@@ -1396,16 +1359,16 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     simply changing `scheme_type::bfv` into `scheme_type::bgv` can make this example
     work for the BGV scheme.
     */
-    //int n =  16;
+    // int n =  16;
     EncryptionParameters parms(scheme_type::bgv);
     size_t poly_modulus_degree = 8192;
-    //size_t poly_modulus_degree = 1<<n;
+    // size_t poly_modulus_degree = 1<<n;
     parms.set_poly_modulus_degree(poly_modulus_degree);
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
-    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 43, 43, 43, 43}));
-    // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 60, 60})); // 不成， fresh 噪声会变小
-
+    parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 43, 43, 43, 43 }));
+    // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 60, 60})); // 不成，
+    // fresh 噪声会变小
 
     /*
     To enable batching, we need to set the plain_modulus to be a prime number
@@ -1437,7 +1400,6 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     Evaluator evaluator(context);
     Decryptor decryptor(context, secret_key);
 
-
     RelinKeys relin_keys;
     keygen.create_relin_keys(relin_keys);
     /*
@@ -1495,15 +1457,16 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     /*
     Next we encrypt the encoded plaintext.
     */
-    Ciphertext encrypted_matrix, encrypted_matrix2, encrypted_matrix3, sum_encrypted_matrix, sum_encrypted_matrix2;
+    Ciphertext encrypted_matrix, encrypted_matrix2, encrypted_matrix3, sum_encrypted_matrix,
+        sum_encrypted_matrix2;
     print_line(__LINE__);
     cout << "Encrypt plain_matrix to encrypted_matrix." << endl;
     encryptor.encrypt(plain_matrix, encrypted_matrix);
     encryptor.encrypt(plain_matrix, encrypted_matrix2);
-    cout << "    + Noise budget in encrypted_matrix: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
-         << endl;
-             cout << "    + Noise budget in encrypted_matrix2: " << decryptor.invariant_noise_budget(encrypted_matrix2) << " bits"
-         << endl;
+    cout << "    + Noise budget in encrypted_matrix: "
+         << decryptor.invariant_noise_budget(encrypted_matrix) << " bits" << endl;
+    cout << "    + Noise budget in encrypted_matrix2: "
+         << decryptor.invariant_noise_budget(encrypted_matrix2) << " bits" << endl;
 
     /*
     Operating on the ciphertext results in homomorphic operations being performed
@@ -1516,7 +1479,7 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     and encode it into a plaintext.
     */
     Plaintext k(1);
-    k[0]=167772160UL;
+    k[0] = 167772160UL;
 
     /*
     We now add the second (plaintext) matrix to the encrypted matrix, and square
@@ -1524,72 +1487,62 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     */
     print_line(__LINE__);
     cout << "scala multiply " << endl;
-        time_t start_time, end_time;
+    time_t start_time, end_time;
     time(&start_time);
-    std::cout<<"k is ntt form"<<k.is_ntt_form()<<std::endl;
-    std::cout<<"encrypted_matrix is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
+    std::cout << "k is ntt form" << k.is_ntt_form() << std::endl;
+    std::cout << "encrypted_matrix is_ntt_form<<" << encrypted_matrix.is_ntt_form() << std::endl;
     evaluator.transform_from_ntt_inplace(encrypted_matrix);
-    std::cout<<"encrypted_matrix is_ntt_form<<"<<encrypted_matrix.is_ntt_form()<<std::endl;
-    // cout << "    + Noise budget in encrypted_matrix ntt_form: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
+    std::cout << "encrypted_matrix is_ntt_form<<" << encrypted_matrix.is_ntt_form() << std::endl;
+    // cout << "    + Noise budget in encrypted_matrix ntt_form: " <<
+    // decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
     //      << endl;
 
-    for (int i=0; i<81920; i++)
-    {
+    for (int i = 0; i < 81920; i++) {
         evaluator.multiply_plain(encrypted_matrix, k, encrypted_matrix3);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     // evaluator.transform_to_ntt_inplace(encrypted_matrix);
-    //  cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
-// evaluator.transform_from_ntt_inplace(sum_encrypted_matrix);
+    //  cout << "    + Noise budget in result: " <<
+    //  decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
+    // evaluator.transform_from_ntt_inplace(sum_encrypted_matrix);
 
     Ciphertext sum_encrypted_matrix_ntt;
 
     print_line(__LINE__);
     cout << " multiply " << endl;
-        // time_t start_time, end_time;
+    // time_t start_time, end_time;
 
-
-    
     time(&start_time);
 
     // evaluator.mod_switch_to_next_inplace(encrypted_matrix2);
-    for (int i=0; i<64; i++)
-    {
-
+    for (int i = 0; i < 64; i++) {
         evaluator.transform_to_ntt(sum_encrypted_matrix, sum_encrypted_matrix_ntt);
         // evaluator.mod_switch_to_next0_inplace(sum_encrypted_matrix_ntt);
- 
+
         evaluator.multiply(encrypted_matrix2, sum_encrypted_matrix_ntt, encrypted_matrix3);
-        if (i==0)
-        {
-            sum_encrypted_matrix2=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix2 = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix2, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
-
-
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     /*
     How much noise budget do we have left?
     */
-    cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix2) << " bits" << endl;
+    cout << "    + Noise budget in result: "
+         << decryptor.invariant_noise_budget(sum_encrypted_matrix2) << " bits" << endl;
 
     /*
     We decrypt and decompose the plaintext to recover the result as a matrix.
@@ -1614,24 +1567,22 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation()
     */
 }
 
-
-
-
 void example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul()
 {
     print_example_banner("Example: Encoders / Batch Encoder");
 
-
-    //int n =  16;
+    // int n =  16;
     EncryptionParameters parms(scheme_type::bgv);
     size_t poly_modulus_degree = 8192;
-    //size_t poly_modulus_degree = 1<<n;
+    // size_t poly_modulus_degree = 1<<n;
     parms.set_poly_modulus_degree(poly_modulus_degree);
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
     // parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
-    std::vector<Modulus> coeff_modulus = CoeffModulus::Create(poly_modulus_degree, { 43, 43, 43, 43});
+    std::vector<Modulus> coeff_modulus =
+        CoeffModulus::Create(poly_modulus_degree, { 43, 43, 43, 43 });
     parms.set_coeff_modulus(coeff_modulus);
-    // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 60, 60})); // 不成， fresh 噪声会变小
+    // parms.set_coeff_modulus(CoeffModulus::Create(poly_modulus_degree, { 60, 60, 60})); // 不成，
+    // fresh 噪声会变小
 
     parms.set_plain_modulus(167772161);
     // parms.set_plain_modulus(PlainModulus::Batching(poly_modulus_degree, 26));
@@ -1657,7 +1608,6 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul()
     Evaluator evaluator(context);
     Decryptor decryptor(context, secret_key);
 
-
     RelinKeys relin_keys;
     keygen.create_relin_keys(relin_keys);
     /*
@@ -1715,15 +1665,16 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul()
     /*
     Next we encrypt the encoded plaintext.
     */
-    Ciphertext encrypted_matrix, encrypted_matrix2, encrypted_matrix3, sum_encrypted_matrix, sum_encrypted_matrix2;
+    Ciphertext encrypted_matrix, encrypted_matrix2, encrypted_matrix3, sum_encrypted_matrix,
+        sum_encrypted_matrix2;
     print_line(__LINE__);
     cout << "Encrypt plain_matrix to encrypted_matrix." << endl;
     encryptor.encrypt(plain_matrix, encrypted_matrix);
     encryptor.encrypt(plain_matrix, encrypted_matrix2);
-    cout << "    + Noise budget in encrypted_matrix: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
-         << endl;
-             cout << "    + Noise budget in encrypted_matrix2: " << decryptor.invariant_noise_budget(encrypted_matrix2) << " bits"
-         << endl;
+    cout << "    + Noise budget in encrypted_matrix: "
+         << decryptor.invariant_noise_budget(encrypted_matrix) << " bits" << endl;
+    cout << "    + Noise budget in encrypted_matrix2: "
+         << decryptor.invariant_noise_budget(encrypted_matrix2) << " bits" << endl;
 
     /*
     Operating on the ciphertext results in homomorphic operations being performed
@@ -1736,7 +1687,7 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul()
     and encode it into a plaintext.
     */
     Plaintext k(1);
-    k[0]=167772160UL;
+    k[0] = 167772160UL;
 
     /*
     We now add the second (plaintext) matrix to the encrypted matrix, and square
@@ -1744,94 +1695,71 @@ void example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul()
     */
     print_line(__LINE__);
     cout << "scala multiply " << endl;
-        time_t start_time, end_time;
-    
-    std::cout<<"k is ntt form: "<<k.is_ntt_form()<<std::endl;
+    time_t start_time, end_time;
+
+    std::cout << "k is ntt form: " << k.is_ntt_form() << std::endl;
     evaluator.transform_from_ntt_inplace(encrypted_matrix);
-    std::cout<<"encrypted_matrix is_ntt_form: "<<encrypted_matrix.is_ntt_form()<<std::endl;
-    // cout << "    + Noise budget in encrypted_matrix ntt_form: " << decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
+    std::cout << "encrypted_matrix is_ntt_form: " << encrypted_matrix.is_ntt_form() << std::endl;
+    // cout << "    + Noise budget in encrypted_matrix ntt_form: " <<
+    // decryptor.invariant_noise_budget(encrypted_matrix) << " bits"
     //      << endl;
-time(&start_time);
-    for (int i=0; i<81920; i++)
-    {
+    time(&start_time);
+    for (int i = 0; i < 81920; i++) {
         evaluator.multiply_plain(encrypted_matrix, k, encrypted_matrix3);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
+    std::cout << "time=" << end_time - start_time << std::endl;
 
+    std::cout << "k is ntt form: " << k.is_ntt_form() << std::endl;
+    std::cout << "encrypted_matrix is_ntt_form: " << encrypted_matrix.is_ntt_form() << std::endl;
+    time(&start_time);
+    MemoryPoolHandle pool = MemoryManager::GetPool();
+    size_t encrypted_size = encrypted_matrix.size();
+    for (int i = 0; i < 81920; i++) {
+        multiply_plain_normal_simple(
+            coeff_modulus, encrypted_matrix, encrypted_size, 54, encrypted_matrix3, pool);
+        // multiply_plain_normal_simple2(coeff_modulus, encrypted_matrix, encrypted_size, 54,
+        // encrypted_matrix3);
 
-
-
- std::cout<<"k is ntt form: "<<k.is_ntt_form()<<std::endl;
-     std::cout<<"encrypted_matrix is_ntt_form: "<<encrypted_matrix.is_ntt_form()<<std::endl;
-time(&start_time);
-      MemoryPoolHandle pool = MemoryManager::GetPool();
-          size_t encrypted_size = encrypted_matrix.size();
-    for (int i=0; i<81920; i++)
-    {
-        multiply_plain_normal_simple(coeff_modulus, encrypted_matrix, encrypted_size, 54, encrypted_matrix3, pool);
-        // multiply_plain_normal_simple2(coeff_modulus, encrypted_matrix, encrypted_size, 54, encrypted_matrix3);
-
-        
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
-
-
-
-
-
-
-
-
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     evaluator.transform_to_ntt_inplace(k, encrypted_matrix.parms_id());
     evaluator.transform_to_ntt_inplace(encrypted_matrix);
- std::cout<<"k is ntt form: "<<k.is_ntt_form()<<std::endl;
-     std::cout<<"encrypted_matrix is_ntt_form: "<<encrypted_matrix.is_ntt_form()<<std::endl;
-time(&start_time);
-   
-    for (int i=0; i<81920; i++)
-    {
+    std::cout << "k is ntt form: " << k.is_ntt_form() << std::endl;
+    std::cout << "encrypted_matrix is_ntt_form: " << encrypted_matrix.is_ntt_form() << std::endl;
+    time(&start_time);
+
+    for (int i = 0; i < 81920; i++) {
         evaluator.multiply_plain(encrypted_matrix, k, encrypted_matrix3);
-        if (i==0)
-        {
-            sum_encrypted_matrix=Ciphertext(encrypted_matrix3);   
-        }
-        else
-        {
+        if (i == 0) {
+            sum_encrypted_matrix = Ciphertext(encrypted_matrix3);
+        } else {
             evaluator.add_inplace(sum_encrypted_matrix, encrypted_matrix3);
         }
     }
     time(&end_time);
 
-    std::cout<<"time="<<end_time-start_time<<std::endl;
-
-
+    std::cout << "time=" << end_time - start_time << std::endl;
 
     /*
     How much noise budget do we have left?
     */
-    cout << "    + Noise budget in result: " << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
-
+    cout << "    + Noise budget in result: "
+         << decryptor.invariant_noise_budget(sum_encrypted_matrix) << " bits" << endl;
 
     /*
     We decrypt and decompose the plaintext to recover the result as a matrix.
@@ -1856,7 +1784,6 @@ time(&start_time);
     */
 }
 
-
 int main()
 {
     print_example_banner("Example: BGV");
@@ -1872,8 +1799,4 @@ int main()
     // example_batch_encoder8192_167772161_bgv_evaluation();
     // example_batch_encoder8192_167772161_bgv_3coeff_evaluation();
     example_batch_encoder8192_167772161_bgv_3coeff_evaluation_plainciphermul();
-
-
-
-
 }

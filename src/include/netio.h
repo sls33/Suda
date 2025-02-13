@@ -13,12 +13,10 @@
 
 // using namespace coproto;
 
-
 //   ---------- send to receive from address -----------
 
-
 template <typename T>
-void send_vector(std::vector<T> &data, std::string  address)
+void send_vector(std::vector<T> &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -37,7 +35,6 @@ void send_vector(std::vector<T> &data, std::string  address)
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
-
 
 template <typename T>
 std::vector<T> recv_vector(std::string address, size_t size)
@@ -61,11 +58,8 @@ std::vector<T> recv_vector(std::string address, size_t size)
     return data;
 }
 
-
-
-
 template <typename T>
-void send_vector_auto(std::vector<T> &data, std::string  address)
+void send_vector_auto(std::vector<T> &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -86,7 +80,6 @@ void send_vector_auto(std::vector<T> &data, std::string  address)
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
-
 
 template <typename T>
 std::vector<T> recv_vector_auto(std::string address)
@@ -112,14 +105,8 @@ std::vector<T> recv_vector_auto(std::string address)
     return data;
 }
 
-
-
-
-
-
-
 template <typename T>
-void send(T & data, std::string  address)
+void send(T &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -138,8 +125,6 @@ void send(T & data, std::string  address)
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
-
-
 
 // template <typename T>
 // void send(T & data, coproto::AsioSocket&  socket)
@@ -173,9 +158,8 @@ void send(T & data, std::string  address)
 //     return data;
 // }
 
-
 template <typename T>
-void recv(T & data, std::string address)
+void recv(T &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -192,7 +176,6 @@ void recv(T & data, std::string address)
     socket.close();
 }
 
-
 template <typename T>
 T recv_auto(std::string address)
 {
@@ -206,19 +189,14 @@ T recv_auto(std::string address)
     // context.timings.wait += wait_duration_time.count();
 
     T data;
-    auto q =  socket.recvResize(data);
+    auto q = socket.recvResize(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
     socket.close();
     return data;
 }
-     
 
-
-
-
-
-void send_ECPSIQuery(ECPSIQuery & data, std::string  address)
+void send_ECPSIQuery(ECPSIQuery &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -233,14 +211,13 @@ void send_ECPSIQuery(ECPSIQuery & data, std::string  address)
     coproto::sync_wait(s);
     auto p = socket.send(data.EIDs);
     coproto::sync_wait(p);
-        auto q = socket.send(data.Elabels);
+    auto q = socket.send(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
     socket.close();
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
-
 
 ECPSIQuery recv_ECPSIQuery(std::string address)
 {
@@ -253,8 +230,8 @@ ECPSIQuery recv_ECPSIQuery(std::string address)
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     size_t size;
-    auto s=socket.recv(size);
-        coproto::sync_wait(s);
+    auto s = socket.recv(size);
+    coproto::sync_wait(s);
     ECPSIQuery data(size);
     auto p = socket.recv(data.EIDs);
     coproto::sync_wait(p);
@@ -266,10 +243,7 @@ ECPSIQuery recv_ECPSIQuery(std::string address)
     return data;
 }
 
-
-
-
-void send_ECPSIResponce(ECPSIResponce & data, std::string  address)
+void send_ECPSIResponce(ECPSIResponce &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -294,7 +268,6 @@ void send_ECPSIResponce(ECPSIResponce & data, std::string  address)
     // context.totalSend += socket.bytesSent();
 }
 
-
 ECPSIResponce recv_ECPSIResponce(std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
@@ -306,8 +279,8 @@ ECPSIResponce recv_ECPSIResponce(std::string address)
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     std::vector<size_t> sizes(3);
-    auto s=socket.recv(sizes);
-        coproto::sync_wait(s);
+    auto s = socket.recv(sizes);
+    coproto::sync_wait(s);
     ECPSIResponce data(sizes);
     auto p = socket.recv(data.ShortEIDs);
     coproto::sync_wait(p);
@@ -315,17 +288,14 @@ ECPSIResponce recv_ECPSIResponce(std::string address)
     auto q = socket.recv(data.EEIDs);
     coproto::sync_wait(q);
 
-        auto r = socket.recv(data.R1Q1s);
+    auto r = socket.recv(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
     socket.close();
     return data;
 }
 
-
-
-
-void send_PK(const PK & data, std::string  address)
+void send_PK(const PK &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -349,7 +319,6 @@ void send_PK(const PK & data, std::string  address)
     // context.totalSend += socket.bytesSent();
 }
 
-
 PK recv_PK(std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
@@ -364,25 +333,21 @@ PK recv_PK(std::string address)
     PK keys;
     auto p = socket.recv(keys.psi_pk);
     coproto::sync_wait(p);
-// std::cout<<__FILE__<<":"<<__LINE__<<endl;
+    // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     string bps_pk_str;
     auto q = socket.recvResize(bps_pk_str);
     coproto::sync_wait(q);
     // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     coproto::sync_wait(socket.flush());
     socket.close();
-// std::cout<<__FILE__<<":"<<__LINE__<<endl;
+    // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     keys.bps_from_str(bps_pk_str);
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
     return keys;
 }
 
-
-
-
-
-void send_BatchPirToShareQueryStream(BatchPirToShareQueryStream & data, std::string  address)
+void send_BatchPirToShareQueryStream(BatchPirToShareQueryStream &data, std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -392,7 +357,6 @@ void send_BatchPirToShareQueryStream(BatchPirToShareQueryStream & data, std::str
 
     const auto wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-
 
     auto p = socket.send(data.cipher_x_powers_stream.str());
     coproto::sync_wait(p);
@@ -406,9 +370,6 @@ void send_BatchPirToShareQueryStream(BatchPirToShareQueryStream & data, std::str
     // context.totalSend += socket.bytesSent();
 }
 
-
-
-
 BatchPirToShareQueryStream recv_BatchPirToShareQueryStream(std::string address)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
@@ -419,7 +380,6 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream(std::string address)
 
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-
 
     string cipher_x_powers_str, row_keepers_str, col_keepers_str;
     auto p = socket.recvResize(cipher_x_powers_str);
@@ -443,15 +403,13 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream(std::string address)
     return bps_query;
 }
 
-
-
-void send_stringstream(stringstream & data, std::string  address)
+void send_stringstream(stringstream &data, std::string address)
 {
     string data_str = data.str();
     send<string>(data_str, address);
 }
 
-stringstream recv_stringstream(std::string  address)
+stringstream recv_stringstream(std::string address)
 {
     string r_str = recv_auto<string>(address);
     stringstream r;
@@ -459,13 +417,7 @@ stringstream recv_stringstream(std::string  address)
     return r;
 }
 
-
 //----- send to receive from socket ------------------
-
-
-
-
-
 
 // template <typename T>
 // void send(T & data, coproto::Socket & socket)
@@ -486,16 +438,8 @@ stringstream recv_stringstream(std::string  address)
 //     socket.close();
 // }
 
-
-
-
-
-
-
-
-
 template <typename T>
-void send_vector_socket(std::vector<T> &data, coproto::Socket & socket)
+void send_vector_socket(std::vector<T> &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -515,9 +459,8 @@ void send_vector_socket(std::vector<T> &data, coproto::Socket & socket)
     // context.totalSend += socket.bytesSent();
 }
 
-
 template <typename T>
-std::vector<T> recv_vector_socket(coproto::Socket & socket, size_t size)
+std::vector<T> recv_vector_socket(coproto::Socket &socket, size_t size)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -538,10 +481,8 @@ std::vector<T> recv_vector_socket(coproto::Socket & socket, size_t size)
     return data;
 }
 
-
-
 template <typename T>
-void send_vector_auto_socket(std::vector<T> &data, coproto::Socket & socket)
+void send_vector_auto_socket(std::vector<T> &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -563,9 +504,8 @@ void send_vector_auto_socket(std::vector<T> &data, coproto::Socket & socket)
     // context.totalSend += socket.bytesSent();
 }
 
-
 template <typename T>
-std::vector<T> recv_vector_auto_socket(coproto::Socket & socket)
+std::vector<T> recv_vector_auto_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -588,14 +528,8 @@ std::vector<T> recv_vector_auto_socket(coproto::Socket & socket)
     return data;
 }
 
-
-
-
-
-
-
 template <typename T>
-void send_socket(T & data, coproto::Socket & socket)
+void send_socket(T &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -616,7 +550,7 @@ void send_socket(T & data, coproto::Socket & socket)
 }
 
 template <typename T>
-T recv_socket(coproto::Socket & socket)
+T recv_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -632,10 +566,8 @@ T recv_socket(coproto::Socket & socket)
     return data;
 }
 
-
-
 template <typename T>
-void recv_socket(T& data, coproto::Socket & socket)
+void recv_socket(T &data, coproto::Socket &socket)
 {
     auto q = socket.recv(data);
     coproto::sync_wait(q);
@@ -644,9 +576,8 @@ void recv_socket(T& data, coproto::Socket & socket)
     // return data;
 }
 
-
 template <typename T>
-T recv_auto_socket(coproto::Socket & socket)
+T recv_auto_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -658,19 +589,14 @@ T recv_auto_socket(coproto::Socket & socket)
     // context.timings.wait += wait_duration_time.count();
 
     T data;
-    auto q =  socket.recvResize(data);
+    auto q = socket.recvResize(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
     // socket.close();
     return data;
 }
-     
 
-
-
-
-
-void send_ECPSIQuery_socket(ECPSIQuery & data, coproto::Socket & socket)
+void send_ECPSIQuery_socket(ECPSIQuery &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -685,7 +611,7 @@ void send_ECPSIQuery_socket(ECPSIQuery & data, coproto::Socket & socket)
     coproto::sync_wait(s);
     auto p = socket.send(data.EIDs);
     coproto::sync_wait(p);
-        auto q = socket.send(data.Elabels);
+    auto q = socket.send(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
     // socket.close();
@@ -693,8 +619,7 @@ void send_ECPSIQuery_socket(ECPSIQuery & data, coproto::Socket & socket)
     // context.totalSend += socket.bytesSent();
 }
 
-
-ECPSIQuery recv_ECPSIQuery_socket(coproto::Socket & socket)
+ECPSIQuery recv_ECPSIQuery_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -705,8 +630,8 @@ ECPSIQuery recv_ECPSIQuery_socket(coproto::Socket & socket)
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     size_t size;
-    auto s=socket.recv(size);
-        coproto::sync_wait(s);
+    auto s = socket.recv(size);
+    coproto::sync_wait(s);
     ECPSIQuery data(size);
     auto p = socket.recv(data.EIDs);
     coproto::sync_wait(p);
@@ -718,12 +643,7 @@ ECPSIQuery recv_ECPSIQuery_socket(coproto::Socket & socket)
     return data;
 }
 
-
-
-
-
-
-void send_ECPaillierPSIQuery_socket(ECPaillierPSIQuery & data, coproto::Socket & socket)
+void send_ECPaillierPSIQuery_socket(ECPaillierPSIQuery &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -739,24 +659,21 @@ void send_ECPaillierPSIQuery_socket(ECPaillierPSIQuery & data, coproto::Socket &
     auto p = socket.send(data.EIDs);
     coproto::sync_wait(p);
 
-    for (size_t i=0; i<data.Elabels.size(); i++)
-    {
+    for (size_t i = 0; i < data.Elabels.size(); i++) {
         // std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
         // std::cout<<"i="<<i<<std::endl;
         auto q = socket.send(data.Elabels[i]);
         coproto::sync_wait(q);
     }
     // send_vector_auto_socket<string>(data.Elabels, socket);
-//  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
+    //  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
     coproto::sync_wait(socket.flush());
     // socket.close();
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
 
-
-
-ECPaillierPSIQuery recv_ECPaillierPSIQuery_socket(coproto::Socket & socket)
+ECPaillierPSIQuery recv_ECPaillierPSIQuery_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -767,31 +684,25 @@ ECPaillierPSIQuery recv_ECPaillierPSIQuery_socket(coproto::Socket & socket)
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     size_t size;
-    auto s=socket.recv(size);
-        coproto::sync_wait(s);
+    auto s = socket.recv(size);
+    coproto::sync_wait(s);
     ECPaillierPSIQuery data(size);
     auto p = socket.recv(data.EIDs);
     coproto::sync_wait(p);
 
-    for (size_t i=0; i<size; i++)
-    {
+    for (size_t i = 0; i < size; i++) {
         // std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
         // std::cout<<"i="<<i<<std::endl;
         auto q = socket.recvResize(data.Elabels[i]);
         coproto::sync_wait(q);
     }
-//  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
+    //  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
     coproto::sync_wait(socket.flush());
     // socket.close();
     return data;
 }
 
-
-
-
-
-
-void send_ECPSIResponce_socket(ECPSIResponce & data, coproto::Socket & socket)
+void send_ECPSIResponce_socket(ECPSIResponce &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -816,8 +727,7 @@ void send_ECPSIResponce_socket(ECPSIResponce & data, coproto::Socket & socket)
     // context.totalSend += socket.bytesSent();
 }
 
-
-ECPSIResponce recv_ECPSIResponce_socket(coproto::Socket & socket)
+ECPSIResponce recv_ECPSIResponce_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -828,8 +738,8 @@ ECPSIResponce recv_ECPSIResponce_socket(coproto::Socket & socket)
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     std::vector<size_t> sizes(3);
-    auto s=socket.recv(sizes);
-        coproto::sync_wait(s);
+    auto s = socket.recv(sizes);
+    coproto::sync_wait(s);
     ECPSIResponce data(sizes);
     auto p = socket.recv(data.ShortEIDs);
     coproto::sync_wait(p);
@@ -837,17 +747,14 @@ ECPSIResponce recv_ECPSIResponce_socket(coproto::Socket & socket)
     auto q = socket.recv(data.EEIDs);
     coproto::sync_wait(q);
 
-        auto r = socket.recv(data.R1Q1s);
+    auto r = socket.recv(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
     // socket.close();
     return data;
 }
 
-
-
-
-void send_ECPaillierPSIResponce_socket(ECPaillierPSIResponce & data, coproto::Socket & socket)
+void send_ECPaillierPSIResponce_socket(ECPaillierPSIResponce &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -864,13 +771,12 @@ void send_ECPaillierPSIResponce_socket(ECPaillierPSIResponce & data, coproto::So
     coproto::sync_wait(p);
     auto q = socket.send(data.EEIDs);
     coproto::sync_wait(q);
-    for (size_t i=0; i<data.Elabels.size(); i++)
-    {
-            //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
-            //  std::cout<<"i="<<i<<std::endl;
-    auto r = socket.send(data.Elabels[i]);
-    // std::cout<<__FILE__<<":"<<__LINE__<<endl;
-    coproto::sync_wait(r);
+    for (size_t i = 0; i < data.Elabels.size(); i++) {
+        //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        //  std::cout<<"i="<<i<<std::endl;
+        auto r = socket.send(data.Elabels[i]);
+        // std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        coproto::sync_wait(r);
     }
 
     coproto::sync_wait(socket.flush());
@@ -879,10 +785,7 @@ void send_ECPaillierPSIResponce_socket(ECPaillierPSIResponce & data, coproto::So
     // context.totalSend += socket.bytesSent();
 }
 
-
-
-
-ECPaillierPSIResponce recv_ECPaillierPSIResponce_socket(coproto::Socket & socket)
+ECPaillierPSIResponce recv_ECPaillierPSIResponce_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -893,31 +796,27 @@ ECPaillierPSIResponce recv_ECPaillierPSIResponce_socket(coproto::Socket & socket
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
     std::vector<size_t> sizes(3);
-    auto s=socket.recv(sizes);
-        coproto::sync_wait(s);
+    auto s = socket.recv(sizes);
+    coproto::sync_wait(s);
     ECPaillierPSIResponce data(sizes);
     auto p = socket.recv(data.ShortEIDs);
     coproto::sync_wait(p);
 
     auto q = socket.recv(data.EEIDs);
     coproto::sync_wait(q);
-    for (size_t i=0; i<data.Elabels.size(); i++)
-    {    
-                    //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
-            //  std::cout<<"i="<<i<<std::endl;
-            auto r = socket.recvResize(data.Elabels[i]);
-            // std::cout<<__FILE__<<":"<<__LINE__<<endl;
-    coproto::sync_wait(r);
+    for (size_t i = 0; i < data.Elabels.size(); i++) {
+        //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        //  std::cout<<"i="<<i<<std::endl;
+        auto r = socket.recvResize(data.Elabels[i]);
+        // std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        coproto::sync_wait(r);
     }
     coproto::sync_wait(socket.flush());
     // socket.close();
     return data;
 }
 
-
-
-
-void send_PK_socket(const PK & data, coproto::Socket & socket, string stage="all")
+void send_PK_socket(const PK &data, coproto::Socket &socket, string stage = "all")
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -927,27 +826,23 @@ void send_PK_socket(const PK & data, coproto::Socket & socket, string stage="all
 
     const auto wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-    if (stage=="psi" || stage=="all")
-    {
+    if (stage == "psi" || stage == "all") {
         auto p = socket.send(data.psi_pk);
         coproto::sync_wait(p);
     }
-    if (stage=="bps" || stage=="all")
-    {
+    if (stage == "bps" || stage == "all") {
         string bps_pk_str = data.bps_to_str();
         auto q = socket.send(bps_pk_str);
         coproto::sync_wait(q);
         coproto::sync_wait(socket.flush());
     }
-    
 
     // socket.close();
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
 
-
-PK recv_PK_socket(coproto::Socket & socket, string stage="all")
+PK recv_PK_socket(coproto::Socket &socket, string stage = "all")
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -959,14 +854,12 @@ PK recv_PK_socket(coproto::Socket & socket, string stage="all")
     // context.timings.wait += wait_duration_time.count();
 
     PK keys;
-    if (stage=="psi" || stage=="all")
-    {
+    if (stage == "psi" || stage == "all") {
         auto p = socket.recv(keys.psi_pk);
         coproto::sync_wait(p);
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     }
-    if (stage=="bps" || stage=="all")
-    {
+    if (stage == "bps" || stage == "all") {
         string bps_pk_str;
         auto q = socket.recvResize(bps_pk_str);
         coproto::sync_wait(q);
@@ -974,7 +867,7 @@ PK recv_PK_socket(coproto::Socket & socket, string stage="all")
         coproto::sync_wait(socket.flush());
         // socket.close();
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
-         keys.bps_from_str(bps_pk_str);
+        keys.bps_from_str(bps_pk_str);
     }
 
     // context.totalReceive += socket.bytesReceived();
@@ -982,11 +875,7 @@ PK recv_PK_socket(coproto::Socket & socket, string stage="all")
     return keys;
 }
 
-
-
-
-
-void send_PKPaillier_socket(const PKPaillier & data, coproto::Socket & socket, string stage="all")
+void send_PKPaillier_socket(const PKPaillier &data, coproto::Socket &socket, string stage = "all")
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -996,31 +885,25 @@ void send_PKPaillier_socket(const PKPaillier & data, coproto::Socket & socket, s
 
     const auto wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-    if (stage=="psi" || stage=="all")
-    {
-       
+    if (stage == "psi" || stage == "all") {
         string psi_pk_str = data.psi_to_str();
-         auto p = socket.send(psi_pk_str);
+        auto p = socket.send(psi_pk_str);
         coproto::sync_wait(p);
         coproto::sync_wait(socket.flush());
     }
-    if (stage=="bps" || stage=="all")
-    {
+    if (stage == "bps" || stage == "all") {
         string bps_pk_str = data.bps_to_str();
         auto q = socket.send(bps_pk_str);
         coproto::sync_wait(q);
         coproto::sync_wait(socket.flush());
     }
-    
 
     // socket.close();
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
 
-
-
-PKPaillier recv_PKPaillier_socket(coproto::Socket & socket, string stage="all")
+PKPaillier recv_PKPaillier_socket(coproto::Socket &socket, string stage = "all")
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -1032,8 +915,7 @@ PKPaillier recv_PKPaillier_socket(coproto::Socket & socket, string stage="all")
     // context.timings.wait += wait_duration_time.count();
 
     PKPaillier keys;
-    if (stage=="psi" || stage=="all")
-    {
+    if (stage == "psi" || stage == "all") {
         // auto p = socket.recv(keys.psi_pk);
         // coproto::sync_wait(p);
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
@@ -1044,11 +926,10 @@ PKPaillier recv_PKPaillier_socket(coproto::Socket & socket, string stage="all")
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
         coproto::sync_wait(socket.flush());
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
-         keys.psi_from_str(psi_pk_str);
+        keys.psi_from_str(psi_pk_str);
         //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
     }
-    if (stage=="bps" || stage=="all")
-    {
+    if (stage == "bps" || stage == "all") {
         string bps_pk_str;
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
         auto q = socket.recvResize(bps_pk_str);
@@ -1056,9 +937,9 @@ PKPaillier recv_PKPaillier_socket(coproto::Socket & socket, string stage="all")
         coproto::sync_wait(q);
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
         coproto::sync_wait(socket.flush());
-            //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
-         keys.bps_from_str(bps_pk_str);
-            //   std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        //  std::cout<<__FILE__<<":"<<__LINE__<<endl;
+        keys.bps_from_str(bps_pk_str);
+        //   std::cout<<__FILE__<<":"<<__LINE__<<endl;
     }
 
     // context.totalReceive += socket.bytesReceived();
@@ -1066,12 +947,8 @@ PKPaillier recv_PKPaillier_socket(coproto::Socket & socket, string stage="all")
     return keys;
 }
 
-
-
-
-
-
-void send_BatchPirToShareQueryStream_socket(BatchPirToShareQueryStream & data, coproto::Socket & socket)
+void send_BatchPirToShareQueryStream_socket(
+    BatchPirToShareQueryStream &data, coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -1081,7 +958,6 @@ void send_BatchPirToShareQueryStream_socket(BatchPirToShareQueryStream & data, c
 
     const auto wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-
 
     auto p = socket.send(data.cipher_x_powers_stream.str());
     coproto::sync_wait(p);
@@ -1095,10 +971,7 @@ void send_BatchPirToShareQueryStream_socket(BatchPirToShareQueryStream & data, c
     // context.totalSend += socket.bytesSent();
 }
 
-
-
-
-BatchPirToShareQueryStream recv_BatchPirToShareQueryStream_socket(coproto::Socket & socket)
+BatchPirToShareQueryStream recv_BatchPirToShareQueryStream_socket(coproto::Socket &socket)
 {
     const auto wait_start_time = std::chrono::system_clock::now();
 
@@ -1108,7 +981,6 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream_socket(coproto::Socke
 
     // const duration_millis wait_duration_time = wait_end_time - wait_start_time;
     // context.timings.wait += wait_duration_time.count();
-
 
     string cipher_x_powers_str, row_keepers_str, col_keepers_str;
     auto p = socket.recvResize(cipher_x_powers_str);
@@ -1132,25 +1004,18 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream_socket(coproto::Socke
     return bps_query;
 }
 
-
-
-void send_stringstream_socket(stringstream & data, coproto::Socket & socket)
+void send_stringstream_socket(stringstream &data, coproto::Socket &socket)
 {
     string data_str = data.str();
     send_socket<string>(data_str, socket);
 }
 
-stringstream recv_stringstream_socket(coproto::Socket & socket)
+stringstream recv_stringstream_socket(coproto::Socket &socket)
 {
     string r_str = recv_auto_socket<string>(socket);
     stringstream r;
     r << r_str;
     return r;
 }
-
-
-
-
-
 
 #endif
