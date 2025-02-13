@@ -82,7 +82,7 @@ bash run_psi_to_share_test_interratio.sh > run_psi_to_share_test_interratio.log 
 Evaluate the performance of secure training using the outputs of secure data alignment. 
 The results are illustrated in part of Table 1 (secure training part).
 
-# Part of Table 1 (secure training part)
+## Part of Table 1 (secure training part)
 
 After running the scripts in Part of Table 1 (secure data alignment part), run the following script:
 
@@ -90,18 +90,16 @@ After running the scripts in Part of Table 1 (secure data alignment part), run t
 bash run_mpclr.sh
 ```
 
+# Efficiency of batch PIR
 
-# Run expierments in Table 5
+
+# Table 5
+
+Run the following script:
 
 ```
 nohup bash run_batchpir_test.sh >batch_pir.log  2>&1 &
 ```
-
-# Run expierments in Table 1 (Suda)
-
-## Part Secure Data Alignment 
-
-
 
 ## Part Secure Training
 
