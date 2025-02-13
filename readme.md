@@ -65,12 +65,12 @@ for example:
 
 it means:
 
-the number of records in Server  is 1<<20,
+the number of samples in the Server  is 1<<20,
 
 the payload size of every record is 100 byte
-the number of client ids is 1024
+the number of client IDs is 1024
 
-# Secure data align:
+# Secure data alignment:
 
 ```
 ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0  &
@@ -86,9 +86,9 @@ for example:
 
 where
 
-the size of Server's dataset is [1<<20, 8]
+the size of the Server's dataset is [1<<20, 8]
 
-the number of Client's ids is 1024
+the number of the Client's IDs is 1024
 
 # Secure data align with different intersection ratio:
 
@@ -97,9 +97,9 @@ the number of Client's ids is 1024
 ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 $inter_ratio
 ```
 
-where  `$inter_ratio`  means the ration of intersection, i.e
+where  `$inter_ratio`  means the ratio of intersection, i.e
 
-record number in intersection / record number of client
+record number in intersection/record number of client
 
 for example:
 
