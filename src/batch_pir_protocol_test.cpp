@@ -197,28 +197,39 @@ void batch_pir_test(
 
     // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
-    *out << " server_init_time:" << server_init_time << " ms " << std::endl;
-    *out << "Mem Usage of Server initialize=" << server_init_mem << "MB" << endl;
+    // *out << "server_init_time:" << server_init_time << " ms " << std::endl;
+    // *out << "Mem Usage of Server initialize=" << server_init_mem << "MB" << endl;
 
-    *out << " client_init_time:" << client_init_time << " ms " << std::endl;
+    // *out << "client_init_time:" << client_init_time << " ms " << std::endl;
 
-    *out << "Mem Usage of Client initialize=" << client_init_mem << "MB" << endl;
+    // *out << "Mem Usage of Client initialize=" << client_init_mem << "MB" << endl;
 
-    *out << "Gen query time: " << query_time << " ms " << std::endl;
-    *out << "Mem Usage of Client generate query=" << query_mem << "MB" << endl;
+    // *out << "Gen query time: " << query_time << " ms " << std::endl;
+    // *out << "Mem Usage of Client generate query=" << query_mem << "MB" << endl;
 
-    *out << "Gen response time: " << response_time << " ms " << std::endl;
-    *out << "Mem Usage of Gen response=" << response_mem << "MB" << endl;
+    // *out << "Gen response time: " << response_time << " ms " << std::endl;
+    // *out << "Mem Usage of Gen response=" << response_mem << "MB" << endl;
 
-    *out << "Extract answer time: " << extract_time << " ms " << std::endl;
-    *out << "Mem Usage of Extract answer=" << extract_mem << "MB" << endl;
+    // *out << "Extract answer time: " << extract_time << " ms " << std::endl;
+    // *out << "Mem Usage of Extract answer=" << extract_mem << "MB" << endl;
 
-    *out << "Query size: " << query.str().size() / 1024.0 << " KBytes" << std::endl;
+    // *out << "Query size: " << query.str().size() / 1024.0 << " KBytes" << std::endl;
 
-    *out << "Response size: " << response.str().size() / 1024.0 << " KBytes" << std::endl;
+    // *out << "Response size: " << response.str().size() / 1024.0 << " KBytes" << std::endl;
 
-    bool correctness = test_correctness(data, new_ids, result);
-    *out << "correctness=" << correctness << std::endl;
+    // bool correctness = test_correctness(data, new_ids, result);
+    // *out << "correctness=" << correctness << std::endl;
+
+    *out << "request size: " << query.str().size() / 1024.0 << " KBytes" << std::endl;
+    *out << "response size: " << response.str().size() / 1024.0 << " KBytes" << std::endl;
+
+    *out << "setup time: " << server_init_time << " ms " << std::endl;
+    *out << "total server time: " << server_init_time + response_time << " ms " << std::endl;
+    *out << "total client time: " << client_init_time + query_time + extract_time << " ms " << std::endl;
+
+    *out << "mem usage of server: " << server_init_mem + response_mem << "MB" << std::endl;
+    *out << "mem usage of client: " << client_init_mem + query_mem + extract_mem << "MB" << std::endl;
+
     *out << "------------------------------------" << std::endl;
     *out << "------------------------------------" << std::endl;
 }

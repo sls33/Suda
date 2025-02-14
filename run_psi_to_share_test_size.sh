@@ -12,7 +12,7 @@ do
         do
             echo "--------------------------------------------------------------------"
             echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size"
-            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 data_size_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 data_size_pc.txt 
+            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 result/data_size_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 result/data_size_pc.txt 
             sleep 3
             echo "--------------------------------------------------------------------"
             echo "--------------------------------------------------------------------"
@@ -35,7 +35,7 @@ do
         do
             echo "--------------------------------------------------------------------"
             echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size"
-            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 data_size_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 data_size_pc.txt 
+            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 result/data_size_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 result/data_size_pc.txt 
             sleep 3
             echo "--------------------------------------------------------------------"
             echo "--------------------------------------------------------------------"

@@ -12,7 +12,7 @@ do
         do
             echo "--------------------------------------------------------------------"
             echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size"
-            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 feature_dimension_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1  feature_dimension_pc.txt
+            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 result/feature_dimension_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1  result/feature_dimension_pc.txt
             sleep 3
             echo "--------------------------------------------------------------------"
         done
@@ -33,8 +33,7 @@ do
         do
             echo "--------------------------------------------------------------------"
             echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size"
-            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 & #> ./log_lan/psi_to_share_test_${host_log_n_data}_${batch_size}_${payload_size}_0.log 2>&1 &
-            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 # > ./log_lan/psi_to_share_test_${host_log_n_data}_${batch_size}_${payload_size}_1.log 2>&1 
+            ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 result/feature_dimension_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1  result/feature_dimension_pc.txt
             sleep 3
             echo "--------------------------------------------------------------------"
         done

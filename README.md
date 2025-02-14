@@ -50,7 +50,7 @@ Run the following script:
 bash run_psi_to_share_test_size.sh
 ```
 
-The running results are stored in the data_size_ps.txt and data_size_pc.txt.
+The running results are stored in the result/data_size_ps.txt and result/data_size_pc.txt.
 
 ## Table 3
 
@@ -60,7 +60,7 @@ Run the following script:
 bash run_psi_to_share_test_payload.sh 
 ```
 
-The running results are stored in the feature_dimension_ps.txt and feature_dimension_pc.txt.
+The running results are stored in the result/feature_dimension_ps.txt and result/feature_dimension_pc.txt.
 
 ## Table 4
 
@@ -70,7 +70,7 @@ Run the following script:
 bash run_psi_to_share_test_interratio.sh 
 ```
 
-The running results are stored in the intersection_size_ps.txt and intersection_size_pc.txt.
+The running results are stored in the result/intersection_size_ps.txt and result/intersection_size_pc.txt.
 
 ## Part of Table 1 (secure data alignment part)
 
@@ -108,6 +108,8 @@ bash run_mpclr.sh
 Run the following script:
 
 ```
-nohup bash run_batchpir_test.sh >batch_pir.log  2>&1 &
+bash run_batchpir_test.sh
 ```
+
+The running results are stored in the result/batch_pir.txt.
 
