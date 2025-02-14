@@ -7,4 +7,5 @@ src/third_party/*
 volepsi/out/*
 .venv
 .cache
-result
+result/*.txt
+data
