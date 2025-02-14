@@ -25,12 +25,13 @@ import logging
 import os
 import time
 import psutil
+import crypten_utils
 # from heart_disease_data import heart_disease_data
 
 from crypten_utils.multiprocess_launcher import (
     MultiProcessLauncher,
 )
-
+# from crypten.multiprocess_launcher import MultiProcessLauncher
 
 parser = argparse.ArgumentParser(description="CrypTen Autograd CNN Training")
 
