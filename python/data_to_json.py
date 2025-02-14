@@ -10,7 +10,7 @@ import struct
 
 
 def csv_to_json_CFI(test_flag):
-    save_as_cols = False
+    save_as_cols = True
     save_as_1row = False
     save_as_rows = False
 
@@ -106,7 +106,7 @@ def csv_to_json_CFI(test_flag):
 
 def get_SVHN(test_flag):
     download = False
-    save_as_cols = False
+    save_as_cols = True
     save_as_1row = False
     save_as_rows = False
     # 下载SVHN数据集

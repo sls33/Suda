@@ -481,7 +481,6 @@ void psi_to_share_2party_socketopt(
         extract_time = timer.elapsed();
     }
 
-    
     *out << "Performance: " << std::endl;
     if (player == player_server) {
         *out << "sent bytes =" << pss_server->get_sent_bytes() / 1024.0 << "KB" << std::endl;

@@ -31,7 +31,8 @@ void send_vector(std::vector<T> &data, std::string address)
     auto p = socket.send(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
+
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -52,7 +53,7 @@ std::vector<T> recv_vector(std::string address, size_t size)
     auto p = socket.recv(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
     return data;
@@ -76,7 +77,7 @@ void send_vector_auto(std::vector<T> &data, std::string address)
     auto q = socket.send(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -99,7 +100,7 @@ std::vector<T> recv_vector_auto(std::string address)
     auto q = socket.recv(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
     return data;
@@ -121,7 +122,7 @@ void send(T &data, std::string address)
     auto p = socket.send(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -133,7 +134,7 @@ void send(T &data, std::string address)
 //     auto p = socket.send(data);
 //     coproto::sync_wait(p);
 //     coproto::sync_wait(socket.flush());
-//     socket.close();
+//     coproto::sync_wait(socket.close());
 //     // context.totalReceive += socket.bytesReceived();
 //     // context.totalSend += socket.bytesSent();
 // }
@@ -154,7 +155,7 @@ void send(T &data, std::string address)
 //     auto q = socket.recv(data);
 //     coproto::sync_wait(q);
 //     coproto::sync_wait(socket.flush());
-//     socket.close();
+//     coproto::sync_wait(socket.close());
 //     return data;
 // }
 
@@ -173,7 +174,7 @@ void recv(T &data, std::string address)
     auto q = socket.recv(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
 }
 
 template <typename T>
@@ -192,7 +193,7 @@ T recv_auto(std::string address)
     auto q = socket.recvResize(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -214,7 +215,7 @@ void send_ECPSIQuery(ECPSIQuery &data, std::string address)
     auto q = socket.send(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -239,7 +240,7 @@ ECPSIQuery recv_ECPSIQuery(std::string address)
     auto q = socket.recv(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -263,7 +264,7 @@ void send_ECPSIResponce(ECPSIResponce &data, std::string address)
     auto r = socket.send(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -291,7 +292,7 @@ ECPSIResponce recv_ECPSIResponce(std::string address)
     auto r = socket.recv(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -314,7 +315,7 @@ void send_PK(const PK &data, std::string address)
     auto q = socket.send(bps_pk_str);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -339,7 +340,7 @@ PK recv_PK(std::string address)
     coproto::sync_wait(q);
     // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // std::cout<<__FILE__<<":"<<__LINE__<<endl;
     keys.bps_from_str(bps_pk_str);
     // context.totalReceive += socket.bytesReceived();
@@ -365,7 +366,7 @@ void send_BatchPirToShareQueryStream(BatchPirToShareQueryStream &data, std::stri
     auto r = socket.send(data.col_keepers_stream.str());
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -392,7 +393,7 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream(std::string address)
     coproto::sync_wait(r);
 
     coproto::sync_wait(socket.flush());
-    socket.close();
+    coproto::sync_wait(socket.close());
 
     BatchPirToShareQueryStream bps_query;
     bps_query.cipher_x_powers_stream << cipher_x_powers_str;
@@ -425,7 +426,7 @@ stringstream recv_stringstream(std::string address)
 //     auto p = socket.send(data);
 //     coproto::sync_wait(p);
 //     coproto::sync_wait(socket.flush());
-//     socket.close();
+//     coproto::sync_wait(socket.close());
 
 // }
 
@@ -435,7 +436,7 @@ stringstream recv_stringstream(std::string address)
 //     auto q = socket.recv(data);
 //     coproto::sync_wait(q);
 //     coproto::sync_wait(socket.flush());
-//     socket.close();
+//     coproto::sync_wait(socket.close());
 // }
 
 template <typename T>
@@ -454,7 +455,7 @@ void send_vector_socket(std::vector<T> &data, coproto::Socket &socket)
     auto p = socket.send(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -475,7 +476,7 @@ std::vector<T> recv_vector_socket(coproto::Socket &socket, size_t size)
     auto p = socket.recv(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
     return data;
@@ -499,7 +500,7 @@ void send_vector_auto_socket(std::vector<T> &data, coproto::Socket &socket)
     auto q = socket.send(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -522,7 +523,7 @@ std::vector<T> recv_vector_auto_socket(coproto::Socket &socket)
     auto q = socket.recv(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
     return data;
@@ -544,7 +545,7 @@ void send_socket(T &data, coproto::Socket &socket)
     auto p = socket.send(data);
     coproto::sync_wait(p);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -562,7 +563,7 @@ T recv_socket(coproto::Socket &socket)
     auto q = socket.recv(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -572,7 +573,7 @@ void recv_socket(T &data, coproto::Socket &socket)
     auto q = socket.recv(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // return data;
 }
 
@@ -592,7 +593,7 @@ T recv_auto_socket(coproto::Socket &socket)
     auto q = socket.recvResize(data);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -614,7 +615,7 @@ void send_ECPSIQuery_socket(ECPSIQuery &data, coproto::Socket &socket)
     auto q = socket.send(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -639,7 +640,7 @@ ECPSIQuery recv_ECPSIQuery_socket(coproto::Socket &socket)
     auto q = socket.recv(data.Elabels);
     coproto::sync_wait(q);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -668,7 +669,7 @@ void send_ECPaillierPSIQuery_socket(ECPaillierPSIQuery &data, coproto::Socket &s
     // send_vector_auto_socket<string>(data.Elabels, socket);
     //  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -698,7 +699,7 @@ ECPaillierPSIQuery recv_ECPaillierPSIQuery_socket(coproto::Socket &socket)
     }
     //  std::cout<<__FILE__<<":"<<__LINE__<<":"<<std::endl;
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -722,7 +723,7 @@ void send_ECPSIResponce_socket(ECPSIResponce &data, coproto::Socket &socket)
     auto r = socket.send(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -750,7 +751,7 @@ ECPSIResponce recv_ECPSIResponce_socket(coproto::Socket &socket)
     auto r = socket.recv(data.R1Q1s);
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -780,7 +781,7 @@ void send_ECPaillierPSIResponce_socket(ECPaillierPSIResponce &data, coproto::Soc
     }
 
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -812,7 +813,7 @@ ECPaillierPSIResponce recv_ECPaillierPSIResponce_socket(coproto::Socket &socket)
         coproto::sync_wait(r);
     }
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     return data;
 }
 
@@ -837,7 +838,7 @@ void send_PK_socket(const PK &data, coproto::Socket &socket, string stage = "all
         coproto::sync_wait(socket.flush());
     }
 
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -865,7 +866,7 @@ PK recv_PK_socket(coproto::Socket &socket, string stage = "all")
         coproto::sync_wait(q);
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
         coproto::sync_wait(socket.flush());
-        // socket.close();
+        // coproto::sync_wait(socket.close());
         // std::cout<<__FILE__<<":"<<__LINE__<<endl;
         keys.bps_from_str(bps_pk_str);
     }
@@ -898,7 +899,7 @@ void send_PKPaillier_socket(const PKPaillier &data, coproto::Socket &socket, str
         coproto::sync_wait(socket.flush());
     }
 
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -966,7 +967,7 @@ void send_BatchPirToShareQueryStream_socket(
     auto r = socket.send(data.col_keepers_stream.str());
     coproto::sync_wait(r);
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
     // context.totalReceive += socket.bytesReceived();
     // context.totalSend += socket.bytesSent();
 }
@@ -993,7 +994,7 @@ BatchPirToShareQueryStream recv_BatchPirToShareQueryStream_socket(coproto::Socke
     coproto::sync_wait(r);
 
     coproto::sync_wait(socket.flush());
-    // socket.close();
+    // coproto::sync_wait(socket.close());
 
     BatchPirToShareQueryStream bps_query;
     bps_query.cipher_x_powers_stream << cipher_x_powers_str;

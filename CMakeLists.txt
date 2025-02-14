@@ -73,7 +73,8 @@ target_link_libraries(ec_psi_test PUBLIC ${SODIUM_LIB} ${SEAL_LIB} IPCL::ipcl IP
 add_executable(psi_to_share_test src/psi_to_share_test.cpp)
 target_link_libraries(psi_to_share_test PUBLIC ${SODIUM_LIB} ${NTL_LIB} ${SEAL_LIB} ${COPROTO_LIB} ${MACORO_LIB} IPCL::ipcl IPPCP::ippcp IPPCP::crypto_mb)
 
-
+add_executable(psi_to_share_using_files_test src/psi_to_share_using_files_test)
+target_link_libraries(psi_to_share_using_files_test PUBLIC ${SODIUM_LIB} ${NTL_LIB} ${SEAL_LIB} ${COPROTO_LIB} ${MACORO_LIB} IPCL::ipcl IPPCP::ippcp IPPCP::crypto_mb)
 
 add_executable(psi_to_share_paillier_test src/psi_to_share_paillier_test.cpp)
 target_link_libraries(psi_to_share_paillier_test PUBLIC ${SODIUM_LIB} ${NTL_LIB} ${SEAL_LIB} ${COPROTO_LIB} ${MACORO_LIB} IPCL::ipcl IPPCP::ippcp IPPCP::crypto_mb)
