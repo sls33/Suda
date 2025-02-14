@@ -463,7 +463,7 @@ void psi_to_share_2party(
         extract_time = timer.elapsed();
     }
 
-    *out << "------------------------------------" << std::endl;
+    
     *out << "Performance: " << std::endl;
     if (player == player_server) {
         *out << " server_init_time:" << server_init_time << " ms " << std::endl;
@@ -506,6 +506,8 @@ void psi_to_share_2party(
                     1024.0
              << " KBytes" << std::endl;
     }
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 
     if (player_server == player_client) {
         bool feature_correctness = test_feature_correctness(
@@ -745,7 +747,6 @@ void psi_to_share_2party_socketopt(
         extract_time = timer.elapsed();
     }
 
-    *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     if (player == player_server) {
 #ifdef DEBUG
@@ -766,11 +767,14 @@ void psi_to_share_2party_socketopt(
 #endif
         // *out<<"sent bytes ="<<pss_server->get_sent_bytes()/1024.0<<"KB"<<std::endl;
         // *out<<"recv bytes ="<<pss_server->get_recv_bytes()/1024.0<<"KB"<<std::endl;
-        *out << "comm. from server to client: "
-             << (psi_response.byte_size() + response.str().size()) / 1024.0 << " KBytes"
-             << std::endl;
+        // *out << "comm. from server to client: "
+        //      << (psi_response.byte_size() + response.str().size()) / 1024.0 << " KBytes"
+        //      << std::endl;
+        *out << "communication size (send + recv): " << (psi_response.byte_size() + response.str().size() + 
+        psi_query.byte_size() + intersection_lastids.size() * sizeof(int32_t) + query.byte_size()) / 1024.0 
+        << " KBytes" << std::endl;
         *out << "mem usage of server: " << GetMemoryUsage() << "MB" << std::endl;
-        *out << "total time of server=" << timer_total.elapsed() << std::endl;
+        *out << "total time of server: " << timer_total.elapsed() << "ms" << std::endl;
     }
 
     if (player == player_client) {
@@ -798,16 +802,22 @@ void psi_to_share_2party_socketopt(
                     1024.0
              << " KBytes" << std::endl;
 #endif
-        *out << "comm. from client to server: "
-             << (psi_query.byte_size() + intersection_lastids.size() * sizeof(int32_t) +
-                 query.byte_size()) /
-                    1024.0
-             << " KBytes" << std::endl;
+        // *out << "comm. from client to server: "
+        //      << (psi_query.byte_size() + intersection_lastids.size() * sizeof(int32_t) +
+        //          query.byte_size()) /
+        //             1024.0
+        //      << " KBytes" << std::endl;
         // *out<<"sent bytes ="<<pss_client->get_sent_bytes()/1024.0<<"KB"<<std::endl;
         // *out<<"recv bytes ="<<pss_client->get_recv_bytes()/1024.0<<"KB"<<std::endl;
+        *out << "communication size (send + recv): " << (psi_response.byte_size() + response.str().size() + 
+        psi_query.byte_size() + intersection_lastids.size() * sizeof(int32_t) + query.byte_size()) / 1024.0 
+        << " KBytes" << std::endl;
         *out << "mem usage of client: " << GetMemoryUsage() << "MB" << std::endl;
-        *out << "total time of client=" << timer_total.elapsed() << std::endl;
+        *out << "total time of client: " << timer_total.elapsed() << "ms" << std::endl;
     }
+
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 
     if (player_server == player_client) {
         bool feature_correctness = test_feature_correctness(
@@ -1081,7 +1091,7 @@ void psi_to_share_2party_socketopt(
         extract_time = timer.elapsed();
     }
 
-    *out << "------------------------------------" << std::endl;
+    // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     if (player == player_server) {
 #ifdef DEBUG
@@ -1136,6 +1146,8 @@ void psi_to_share_2party_socketopt(
         *out << "mem usage of client: " << GetMemoryUsage() << "MB" << std::endl;
         *out << "total time of client=" << timer_total.elapsed() << std::endl;
     }
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 
     // if (player_server==player_client)
     // {
@@ -1416,7 +1428,7 @@ void psi_to_share_2party_socketopt_fromfile(
         extract_time = timer.elapsed();
     }
 
-    *out << "------------------------------------" << std::endl;
+    // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     if (player == player_server) {
 #ifdef DEBUG
@@ -1471,6 +1483,8 @@ void psi_to_share_2party_socketopt_fromfile(
     }
 
     *out << "total time =" << timer_total.elapsed() << std::endl;
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 }
 
 #endif

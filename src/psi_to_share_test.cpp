@@ -106,7 +106,7 @@ void psi_to_share_test(bool mode_switch, size_t batch_size, std::ostream *out)
     auto result1 = pss_client.extract_BPS_answer(response);
     auto extract_time = timer.elapsed();
 
-    *out << "------------------------------------" << std::endl;
+    
     *out << "Performance: " << std::endl;
     *out << " server_init_time:" << server_init_time << " ms " << std::endl;
     *out << " client_init_time:" << client_init_time << " ms " << std::endl;
@@ -156,6 +156,8 @@ void psi_to_share_test(bool mode_switch, size_t batch_size, std::ostream *out)
     bool label_correctness =
         test_label_correctness(client_labels, start, label_shares0, label_shares1);
     *out << "label_correctness=" << label_correctness << std::endl;
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 }
 
 void psi_to_share_test(bool mode_switch, size_t batch_size, size_t player, std::ostream *out)
@@ -318,7 +320,7 @@ void psi_to_share_test(bool mode_switch, size_t batch_size, size_t player, std::
         extract_time = timer.elapsed();
     }
 
-    *out << "------------------------------------" << std::endl;
+    
     *out << "Performance: " << std::endl;
     if (player == player_server) {
         *out << " server_init_time:" << server_init_time << " ms " << std::endl;
@@ -361,6 +363,8 @@ void psi_to_share_test(bool mode_switch, size_t batch_size, size_t player, std::
                     1024.0
              << " KBytes" << std::endl;
     }
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
     bool feature_correctness = test_feature_correctness(
         data, new_ids, result0, result1, pss_client->get_prime_num(), intersection_size);
     *out << "feature_correctness=" << feature_correctness << std::endl;

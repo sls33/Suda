@@ -14,8 +14,7 @@ do
             do
                 echo "---------------------------------LAN-----------------------------------"
                 echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size, inter_ratio=$inter_ratio"
-                ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 $inter_ratio & #> ./log_lan/psi_to_share_test_${host_log_n_data}_${batch_size}_${payload_size}_${inter_ratio}_0.log 2>&1 &
-                ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 $inter_ratio   #> ./log_lan/psi_to_share_test_${host_log_n_data}_${batch_size}_${payload_size}_${inter_ratio}_1.log 2>&1 
+                ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 0 $inter_ratio intersection_size_ps.txt & ./build/bin/psi_to_share_test $host_log_n_data $batch_size $payload_size 1 $inter_ratio  intersection_size_pc.txt
                 sleep 3
                 echo "--------------------------------------------------------------------"
             done

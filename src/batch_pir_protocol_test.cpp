@@ -195,7 +195,7 @@ void batch_pir_test(
     mem_usg_end = GetMemoryUsage();
     float extract_mem = mem_usg_end - mem_usg_start;
 
-    *out << "------------------------------------" << std::endl;
+    // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     *out << " server_init_time:" << server_init_time << " ms " << std::endl;
     *out << "Mem Usage of Server initialize=" << server_init_mem << "MB" << endl;
@@ -219,6 +219,8 @@ void batch_pir_test(
 
     bool correctness = test_correctness(data, new_ids, result);
     *out << "correctness=" << correctness << std::endl;
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 }
 
 // void batch_pir_test(size_t party_id, size_t host_log_n_data, size_t batch_size, size_t
@@ -388,7 +390,7 @@ void batch_pir_test_1024(std::ostream *out)
     auto result = bp_client.extract_answer(response);
     auto extract_time = timer.elapsed();
 
-    *out << "------------------------------------" << std::endl;
+    // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     *out << " server_init_time:" << server_init_time << " ms " << std::endl;
     *out << " sclient_init_time:" << client_init_time << " ms " << std::endl;
@@ -402,7 +404,8 @@ void batch_pir_test_1024(std::ostream *out)
 
     bool correctness = test_correctness(data, new_ids, result);
     *out << "correctness=" << correctness << std::endl;
-
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
     // std::cout<<"result="<<std::endl;
     // for (int i=0; i<4; i++)
     // {
@@ -465,7 +468,7 @@ void batch_pir_test_2048(std::ostream *out)
     auto result = bp_client.extract_answer(response);
     auto extract_time = timer.elapsed();
 
-    *out << "------------------------------------" << std::endl;
+    // *out << "------------------------------------" << std::endl;
     *out << "Performance: " << std::endl;
     *out << " server_init_time:" << server_init_time << " ms " << std::endl;
     *out << " sclient_init_time:" << client_init_time << " ms " << std::endl;
@@ -479,7 +482,8 @@ void batch_pir_test_2048(std::ostream *out)
 
     bool correctness = test_correctness(data, new_ids, result);
     *out << "correctness=" << correctness << std::endl;
-
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
     // fs<<"result="<<std::endl;
     // for (int i=0; i<4; i++)
     // {

@@ -7,7 +7,7 @@ do
         do
             echo "--------------------------------------------------------------------"
             echo "host_log_n_data=$host_log_n_data, batch_size=$batch_size, payload_size=$payload_size"
-            ./build/bin/batch_pir_protocol_test $host_log_n_data $batch_size $payload_size
+            ./build/bin/batch_pir_protocol_test $host_log_n_data $batch_size $payload_size 
             echo "--------------------------------------------------------------------"
         done
     done

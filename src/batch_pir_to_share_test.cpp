@@ -119,7 +119,7 @@ void batch_pir_to_share_test1(bool mode_switch, size_t batch_size, std::ostream 
     auto result1 = bp_client.extract_answer(response);
     auto extract_time = timer.elapsed();
 
-    *out << "------------------------------------" << std::endl;
+    
     *out << "Performance: " << std::endl;
     *out << " server_init_time:" << server_init_time << " ms " << std::endl;
     *out << " sclient_init_time:" << client_init_time << " ms " << std::endl;
@@ -134,6 +134,9 @@ void batch_pir_to_share_test1(bool mode_switch, size_t batch_size, std::ostream 
     bool correctness =
         test_feature_correctness(data, new_ids, result0, result1, bp_client.get_prime_num());
     *out << "correctness=" << correctness << std::endl;
+
+    *out << "------------------------------------" << std::endl;
+    *out << "------------------------------------" << std::endl;
 }
 
 int main(int argc, char *argv[])
