@@ -87,6 +87,8 @@ Then run the following script:
 bash run_psi_to_share_using_files_test.sh
 ```
 
+The running results are stored in the result/CFIX_ps.txt, result/CFIX_pc.txt for the Character Font Images dataset, and result/SVHN_ps.txt, result/SVHN_pc.txt for the SVHN dataset.
+
 # Efficiency of secure training
 
 Evaluate the performance of secure training using the outputs of secure data alignment. 
