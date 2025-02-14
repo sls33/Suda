@@ -84,7 +84,7 @@ bash preprocess_dataset.sh
 Then run the following script:
 
 ```
-nohup bash run_psi_to_share_using_files_test.sh > run_psi_to_share_using_files_test.log 2>&1 &
+bash run_psi_to_share_using_files_test.sh
 ```
 
 # Efficiency of secure training
