@@ -1,0 +1,24 @@
+host_log_n_data=20
+batch_size=1024
+feature_num=100
+party_id=1
+Performance: 
+communication size (send + recv): 91950.7 KBytes
+mem usage of client: 293.473MB
+total time of client: 195456ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=2048
+feature_num=100
+party_id=1
+Performance: 
+communication size (send + recv): 110760 KBytes
+mem usage of client: 335.109MB
+total time of client: 244695ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=4096
+feature_num=100
+party_id=1

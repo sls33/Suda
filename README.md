@@ -32,16 +32,47 @@ bash volepsi.get
 
 ```
 bash setup.sh
+cmake -S . -B build
+cmake --build build -j
 ```
 
 When executing this script, you may face an error about 'pip install sklearn' and you can resolve it by following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
 
 # Efficiency of secure unbalanced data alignment
 
-Evaluate the efficiency of Suda over different data settings. The results are illustrated in part of Table 1 (secure data alignment part), Table 2, Table 3 and Table 4 in the paper.
+Evaluate the efficiency of Suda over different data settings. The results are illustrated in Table 2, Table 3, Table 4 and part of Table 1 (secure data alignment part) in the paper.
+
+## Table 2 
+
+Run the following script:
+
+```
+bash run_psi_to_share_test_size.sh
+```
+
+The running results are stored in the data_size_ps.txt and data_size_pc.txt.
+
+## Table 3
+
+Run the following script:
+
+```
+bash run_psi_to_share_test_payload.sh 
+```
+
+The running results are stored in the feature_dimension_ps.txt and feature_dimension_pc.txt.
+
+## Table 4
+
+Run the following script:
+
+```
+bash run_psi_to_share_test_interratio.sh 
+```
+
+The running results are stored in the intersection_size_ps.txt and intersection_size_pc.txt.
 
 ## Part of Table 1 (secure data alignment part)
-
 
 Firstly, download and preprocess the datasets:
 
@@ -54,30 +85,6 @@ Then run the following script:
 
 ```
 nohup bash run_psi_to_share_using_files_test.sh > run_psi_to_share_using_files_test.log 2>&1 &
-```
-
-## Table 2 
-
-Run the following script:
-
-```
-bash run_psi_to_share_test_size.sh
-```
-
-## Table 3
-
-Run the following script:
-
-```
-bash run_psi_to_share_test_payload.sh 
-```
-
-## Table 4
-
-Run the following script:
-
-```
-bash run_psi_to_share_test_interratio.sh 
 ```
 
 # Efficiency of secure training

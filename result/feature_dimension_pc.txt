@@ -1,0 +1,54 @@
+host_log_n_data=20
+batch_size=1024
+feature_num=100
+party_id=1
+Performance: 
+communication size (send + recv): 91951.5 KBytes
+mem usage of client: 293.438MB
+total time of client: 196784ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=1024
+feature_num=200
+party_id=1
+Performance: 
+communication size (send + recv): 103808 KBytes
+mem usage of client: 319.379MB
+total time of client: 257024ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=1024
+feature_num=500
+party_id=1
+Performance: 
+communication size (send + recv): 139376 KBytes
+mem usage of client: 446.934MB
+total time of client: 452161ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=1024
+feature_num=1000
+party_id=1
+Performance: 
+communication size (send + recv): 198659 KBytes
+mem usage of client: 620.781MB
+total time of client: 765121ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=1024
+feature_num=1500
+party_id=1
+Performance: 
+communication size (send + recv): 257940 KBytes
+mem usage of client: 832.09MB
+total time of client: 1.07556e+06ms
+------------------------------------
+------------------------------------
+host_log_n_data=20
+batch_size=1024
+feature_num=2000
+party_id=1

@@ -1,7 +1,6 @@
 #-------setup c++
 
-cmake -S . -B build
-cmake --build build -j
+
 
 # #-------setup python ---------
 export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
