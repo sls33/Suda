@@ -38,6 +38,16 @@ cmake --build build -j
 
 When executing this script, you may face an error about 'pip install sklearn' and you can resolve it by following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
 
+# Basic Test
+
+After installing all the dependencies and third-party libraries, you can run the following command to run a simple functionality test. In this command, 20 refers to the larger data size $$N = 2^{20}$$, 1024 refers to the smaller data size $$n = 1024$$, and 100 refers to the feature dimensions $$m = 100$$. The results are stored in the files ``test_ps.txt`` and ``test_pc.txt``.
+
+```
+./build/bin/psi_to_share_test 20 1024 100 0 test_ps.txt & ./build/bin/psi_to_share_test 20 1024 100 1 test_pc.txt
+```
+
+
+
 # Efficiency of secure unbalanced data alignment
 
 Evaluate the efficiency of Suda over different data settings. The results are illustrated in Table 2, Table 3, Table 4 and part of Table 1 (secure data alignment part) in the paper.
