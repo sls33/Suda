@@ -36,7 +36,11 @@ cmake -S . -B build
 cmake --build build -j
 ```
 
-When executing this script, you may face an error about 'pip install sklearn' and you can resolve it by following the solution in https://github.com/facebookresearch/CrypTen/issues/512.
+When executing this script, you may face an error about 'pip install sklearn', and you can resolve it by setting this env variable to true
+
+```
+export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True
+```
 
 # Basic Test
 
